@@ -66,7 +66,6 @@ export default function Product() {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Method:</Typography>
                     <Typography paragraph>
                         Galletas de camote naranja y morado con hongos
                     </Typography>
