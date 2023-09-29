@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Information() {
   return (
-    <Box sx={{ flexGrow: 1 , display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Grid container spacing={4} columns={20}>
         <Grid item xs={24} sm={12} md={10} lg={5}>
           <Item>
@@ -53,10 +53,10 @@ export default function Information() {
                 Mision
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              Elaborar productos alimenticios que permanezcan en la preferencia del consumidor,
-              por su innovación, sabor inigualable, calidad, frescura y función relajante hacia el estrés, 
-              ansiedad y problemas de depresión; siempre responsables con el cuidado del medio 
-              ambiente.
+                Elaborar productos alimenticios que permanezcan en la preferencia del consumidor,
+                por su innovación, sabor inigualable, calidad, frescura y función relajante hacia el estrés,
+                ansiedad y problemas de depresión; siempre responsables con el cuidado del medio
+                ambiente.
               </Typography>
             </CardContent>
           </Card>
@@ -74,9 +74,9 @@ export default function Information() {
                 Vision
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              Ser una empresa innovadora dentro del sector alimenticio, ofreciendo productos 
-              horneados de calidad e innovación, siendo una empresa líder en la zona centro de la
-              República Mexicana.
+                Ser una empresa innovadora dentro del sector alimenticio, ofreciendo productos<br/>
+                horneados de calidad e innovación, siendo una empresa líder en la zona centro de la<br/>
+                República Mexicana.<br/>
               </Typography>
             </CardContent>
           </Card>
@@ -94,18 +94,32 @@ export default function Information() {
                 Valores
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              Fidelidad, creando una red de confianza.<br/>
-              Orientación al cliente.<br/>
-              Respeto en el área de trabajo y para nuestros consumidores.<br/>
-              Equilibrio.<br/>
-              Seguridad alimentaria.<br/>
-              Talento.
+                Fidelidad, creando una red de confianza.<br />
+                Orientación al cliente.<br />
+                Respeto en el área de trabajo y para nuestros consumidores.<br />
+                Equilibrio.<br />
+                Seguridad alimentaria.<br />
+                Talento.
               </Typography>
             </CardContent>
           </Card>
           </Item>
         </Grid>
+        <Grid item xs={24} sm={12} md={10} lg={5}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Contacto
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Dirección: Santa Maria Atarasquillo<br />
+              Ciudad: Lerma<br />
+              Teléfono: (729) 456-7890<br />
+              Correo Electrónico: example@example.com
+            </Typography>
+          </CardContent>
+        </Grid>
       </Grid>
     </Box>
+
   );
 }

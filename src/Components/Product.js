@@ -9,6 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import accounting from 'accounting';
 import { AddShoppingCart } from '@mui/icons-material';
 
 const ExpandMore = styled((props) => {
@@ -22,7 +23,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function Product() {
+export default function Product({products : {id, name, productType, image, price, description}}) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -36,15 +37,16 @@ export default function Product() {
                     <Typography
                         variant='h5'
                         color='textsecondary'>
-                        ${50}
+                        {accounting.formatMoney(price,"$")}
                     </Typography>
                 }
-                title="Linea Azul"
+                title={name}
+                subheader={productType}
             />
             <CardMedia
                 component="img"
                 height="194"
-                image="https://recetinas.com/wp-content/uploads/2019/09/galletas-de-chocolate-al-microondas-1.jpg"
+                image={image}
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -67,7 +69,7 @@ export default function Product() {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>
-                        Galletas de camote naranja y morado con hongos
+                        {description}
                     </Typography>
 
                 </CardContent>
