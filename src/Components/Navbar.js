@@ -17,7 +17,6 @@ export default function Navbar() {
             <Button color="inherit">Productos</Button>
           </Typography>
           <Button variant="outlined" color="inherit">Sign In</Button>
-
           <IconButton aria-label="show cart items" color="inherit">
               <ShoppingCart fontSize="large" /> 
           </IconButton>

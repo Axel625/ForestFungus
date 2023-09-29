@@ -53,9 +53,10 @@ export default function Information() {
                 Mision
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Forest fungus ofrece una galleta funcional elaborada con camote y hongos cucumelo, que
-                ayuda a proporcionar  un estado de tranquilidad a personas mayores de 18  al inducir un
-                estado de relajación (Problemas de estrés, ansiedad y depresion)
+              Elaborar productos alimenticios que permanezcan en la preferencia del consumidor,
+              por su innovación, sabor inigualable, calidad, frescura y función relajante hacia el estrés, 
+              ansiedad y problemas de depresión; siempre responsables con el cuidado del medio 
+              ambiente.
               </Typography>
             </CardContent>
           </Card>
@@ -73,15 +74,15 @@ export default function Information() {
                 Vision
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Forest fungus ofrece una galleta funcional elaborada con camote y hongos cucumelo, que
-                ayuda a proporcionar  un estado de tranquilidad a personas mayores de 18  al inducir un
-                estado de relajación (Problemas de estrés, ansiedad y depresion)
+              Ser una empresa innovadora dentro del sector alimenticio, ofreciendo productos 
+              horneados de calidad e innovación, siendo una empresa líder en la zona centro de la
+              República Mexicana.
               </Typography>
             </CardContent>
           </Card>
           </Item>
         </Grid>
-        <Grid itemxs={24} sm={12} md={10} lg={5}>
+        <Grid item xs={24} sm={12} md={10} lg={5}>
           <Item><Card sx={{ maxWidth: 400 }}>
             <CardMedia
               sx={{ height: 140, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
@@ -93,9 +94,12 @@ export default function Information() {
                 Valores
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Forest fungus ofrece una galleta funcional elaborada con camote y hongos cucumelo, que
-                ayuda a proporcionar  un estado de tranquilidad a personas mayores de 18  al inducir un
-                estado de relajación (Problemas de estrés, ansiedad y depresion)
+              Fidelidad, creando una red de confianza.<br/>
+              Orientación al cliente.<br/>
+              Respeto en el área de trabajo y para nuestros consumidores.<br/>
+              Equilibrio.<br/>
+              Seguridad alimentaria.<br/>
+              Talento.
               </Typography>
             </CardContent>
           </Card>
