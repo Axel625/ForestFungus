@@ -33,7 +33,7 @@ export default function Navbar() {
           </Typography>
           <Button variant="outlined" color="inherit">Sign In</Button>
           <IconButton aria-label="cart">
-            <StyledBadge badgeContent={4} color="secondary">
+            <StyledBadge badgeContent={3} color="error">
               <ShoppingCartIcon />
             </StyledBadge>
           </IconButton>
