@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import logo from "../Assets/Forest.png";
+import { useStateValue } from '../StateProvider'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -28,6 +29,7 @@ const navbarButtonStyle = {
 };
 
 const Navbar = () => {
+  const [{ basket }, dispatch] = useStateValue();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'green' }}>
@@ -46,7 +48,7 @@ const Navbar = () => {
           </Link>
           <Link to="/Checkout-page" style={linkStyle}>
             <IconButton aria-label="cart" color="inherit" variant='outlined' >
-              <StyledBadge badgeContent={3} color="error">
+              <StyledBadge badgeContent={basket?.length} color="error">
                 <ShoppingCartIcon />
               </StyledBadge>
             </IconButton>

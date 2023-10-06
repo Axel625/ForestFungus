@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import accounting from 'accounting';
 import { AddShoppingCart } from '@mui/icons-material';
+import { actionTypes } from '../Reducer';
+import {useStateValue} from '../StateProvider'
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -23,12 +25,29 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function Product({products : {id, name, productType, image, price, description}}) {
+export default function Product({ products: { id, name, productType, image, price, description } }) {
+
+    const[{basket}, dispatch] = useStateValue();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    const addToBasket = () => {
+        dispatch({
+            type: actionTypes.ADD_TO_BASKET,
+            item: {
+                id,
+                name,
+                productType,
+                image,
+                price,
+                description,
+            }
+        })
+    }
+
 
     return (
         <Card sx={{ maxWidth: 345 }}>
@@ -37,7 +56,7 @@ export default function Product({products : {id, name, productType, image, price
                     <Typography
                         variant='h5'
                         color='textsecondary'>
-                        {accounting.formatMoney(price,"$")}
+                        {accounting.formatMoney(price, "$")}
                     </Typography>
                 }
                 title={name}
@@ -54,7 +73,7 @@ export default function Product({products : {id, name, productType, image, price
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" onClick={addToBasket}>
                     <AddShoppingCart fontSize='large' />
                 </IconButton>
                 <ExpandMore
