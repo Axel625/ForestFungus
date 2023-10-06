@@ -2,21 +2,31 @@
 import './App.css';
 import Information from './Components/Information';
 import Navbar from './Components/Navbar'
-//import Products from './Components/Products';
-//import CheckoutPage from "./Components/CheckoutPage"
+import Products from './Components/Products';
+import CheckoutPage from "./Components/CheckoutPage"
 import ImageCarousel from './Components/carrucel';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Navbar />
-      <ImageCarousel />
-      <Information/>
-      {/*<Products />*/}
-      {/*<CheckoutPage/>*/}
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" Component={ImageCarousel} />
+          <Route path="/Checkout-page" Component={CheckoutPage}>
+          </Route>
+          <Route path="/Productos" Component={Products}>
+          </Route>
+        </Routes>
+        <Routes>
+          <Route path="/" Component={Information}>
+          </Route>
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

@@ -4,11 +4,12 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton'
+import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Products from "../Components/Products"
+import { Link } from 'react-router-dom';
+import logo from "../Assets/Forest.png";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -18,27 +19,44 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     padding: '0 4px',
   },
 }));
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'white', // Cambiar el color de los enlaces a blanco
+};
+const navbarButtonStyle = {
+  marginLeft: '10px', // Añadir margen izquierdo al botón
+};
 
-
-
-export default function Navbar() {
+const Navbar = () => {
   return (
-    <Box  >
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'green' }}>
         <Toolbar>
+          <Link to="/">
+            <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
+          </Link>
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Button variant="outlined" color="inherit" Link href={Products}>
-           Productos
-           </Button>
+            <Link to="/Productos" style={linkStyle}>
+              <Button color="inherit" variant='outlined'>Productos</Button>
+            </Link>
           </Typography>
-          <Button variant="outlined" color="inherit">Sign In</Button>
-          <IconButton aria-label="cart">
-            <StyledBadge badgeContent={3} color="error">
-              <ShoppingCartIcon />
-            </StyledBadge>
-          </IconButton>
+          <Link style={linkStyle} >
+            <Button color="inherit" variant='outlined' style={navbarButtonStyle}>Sign In</Button>
+          </Link>
+          <Link to="/Checkout-page" style={linkStyle}>
+            <IconButton aria-label="cart" color="inherit" variant='outlined' >
+              <StyledBadge badgeContent={3} color="error">
+                <ShoppingCartIcon />
+              </StyledBadge>
+            </IconButton>
+          </Link>
+
+
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
+
+export default Navbar;
