@@ -8,6 +8,7 @@ import ImageCarousel from './Components/carrucel';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './Components/signin';
 import SignUp from './Components/Signup';
+import Checkout from './Components/CheckoutForm/Checkout';
 
 
 const App = () => {
@@ -24,6 +25,8 @@ const App = () => {
           <Route path="/Inicio_de_Sesion" Component={SignIn}>
           </Route>
           <Route path="/Registro" Component={SignUp}>
+          </Route>
+          <Route path="/Verificacion" Component={Checkout}>
           </Route>
         </Routes>
         <Routes>
