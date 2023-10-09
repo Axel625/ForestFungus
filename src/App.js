@@ -6,6 +6,8 @@ import Products from './Components/Products';
 import CheckoutPage from "./Components/CheckoutPage"
 import ImageCarousel from './Components/carrucel';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignIn from './Components/signin';
+import SignUp from './Components/Signup';
 
 
 const App = () => {
@@ -18,6 +20,10 @@ const App = () => {
           <Route path="/Checkout-page" Component={CheckoutPage}>
           </Route>
           <Route path="/Productos" Component={Products}>
+          </Route>
+          <Route path="/Inicio_de_Sesion" Component={SignIn}>
+          </Route>
+          <Route path="/Registro" Component={SignUp}>
           </Route>
         </Routes>
         <Routes>

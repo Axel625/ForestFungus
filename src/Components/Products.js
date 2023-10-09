@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Products() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
+      <Grid container spacing={6} columns={10}>
         {
           products.map(products =>(
             <Grid xs={12} sm={6} md={4} lg={3}>

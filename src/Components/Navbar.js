@@ -29,7 +29,7 @@ const navbarButtonStyle = {
 };
 
 const Navbar = () => {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket }] = useStateValue();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'green' }}>
@@ -43,7 +43,7 @@ const Navbar = () => {
               <Button color="inherit" variant='outlined'>Productos</Button>
             </Link>
           </Typography>
-          <Link style={linkStyle} >
+          <Link to="/Inicio_de_Sesion" style={linkStyle} >
             <Button color="inherit" variant='outlined' style={navbarButtonStyle}>Sign In</Button>
           </Link>
           <Link to="/Checkout-page" style={linkStyle}>
