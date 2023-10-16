@@ -13,6 +13,7 @@ import accounting from 'accounting';
 import { AddShoppingCart } from '@mui/icons-material';
 import { actionTypes } from '../Reducer';
 import {useStateValue} from '../StateProvider'
+import Information from './Information';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -92,7 +93,12 @@ export default function Product({ products: { id, name, productType, image, pric
                     </Typography>
 
                 </CardContent>
+
+                
             </Collapse>
+            
         </Card>
+    
+            
     );
 }

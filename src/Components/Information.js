@@ -19,12 +19,12 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Information() {
   return (
 
-    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Grid container spacing={6} columns={10}>
-        <Grid item xs={24} sm={12} md={12} lg={10}>
+    <Box sx={{ flexGrow: 1, display: 'static', justifyContent: 'center', alignItems: 'center' }}>
+      <Grid container spacing={3} columns={10}>
+        <Grid item xs={12} sm={12} md={12} lg={10}>
           <Item>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 400, textAlign: 'center', alignItems: 'center' }}>
+              <Card sx={{ maxWidth: 300, textAlign: 'center', alignItems: 'center' }}>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     Propuesta de valor
@@ -103,17 +103,19 @@ export default function Information() {
               <Typography gutterBottom variant="h5" component="div">
                 Contacto
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Dirección: Santa Maria Atarasquillo<br />
-                Ciudad: Lerma<br />
-                Teléfono: (729) 456-7890<br />
-                Correo Electrónico: example@example.com
-              </Typography>
+              <Grid container justifyContent="center">
+                <Typography variant="body2" color="text.secondary">
+                  Dirección: Santa Maria Atarasquillo<br />
+                  Ciudad: Lerma<br />
+                  Teléfono: (729) 456-7890<br />
+                  Correo Electrónico: example@example.com
+                </Typography>
+              </Grid>
             </CardContent>
           </Grid>
         </Grid>
       </Grid>
-    </Box>
+    </Box >
 
   );
 }
