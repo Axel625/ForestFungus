@@ -11,22 +11,31 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as RouteLink} from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
+import axios from 'axios';
 
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api/1.0/create_user/'
+});
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    try {
+      const response = await api.post('', {
+        
+        email: data.get('email'),
+        password: data.get('password'),
+      });
+
+      console.log('Usuario creado con éxito', response.data);
+    } catch (error) {
+      console.error('Error al crear el usuario', error);
+    }
   };
 
   return (
@@ -87,9 +96,9 @@ export default function SignIn() {
                 </RouteLink>
               </Grid>
               <Grid item>
-               <RouteLink to="/Registro">
+                <RouteLink to="/Registro">
                   {"Don't have an account? Sign Up"}
-                  </RouteLink>
+                </RouteLink>
               </Grid>
             </Grid>
           </Box>

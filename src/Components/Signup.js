@@ -3,42 +3,46 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as RouteLink} from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
+import axios from 'axios';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <RouteLink color="inherit" href="https://mui.com/">
-        Your Website
-      </RouteLink>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+//NO MOVER AXIOS PORQUE YA SE CONSUME LA API BIEN
 
-// TODO remove, this demo shouldn't need to reset the theme.
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api/1.0/create_user/',
+});
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    try {
+      const response = await api.post('', {
+        first_name: data.get('first_name'),
+        last_name: data.get('last_name'),
+        email: data.get('email'),
+        password: data.get('password'),
+      });
+
+      
+      console.log('Usuario creado con éxito', response.data);
+    } catch (error) {
+      
+      console.error('Error al crear el usuario', error);
+    }
   };
+
+
+  //LOS CAMPOS DE FIRST NAME Y LAST NAME ESTABAN MAL CON EL BACKEND
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -53,7 +57,7 @@ export default function SignUp() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <PersonAddIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -61,25 +65,27 @@ export default function SignUp() {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
+              <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="first_name"  // Cambiar "firstName" a "first_name"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
                 />
+
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
+              <TextField
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="last_name"  // Cambiar "lastName" a "last_name"
+                autoComplete="family-name"
+              />
+
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -102,12 +108,6 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -126,7 +126,6 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
