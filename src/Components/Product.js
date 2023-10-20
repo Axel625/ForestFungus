@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import accounting from 'accounting';
 import { AddShoppingCart } from '@mui/icons-material';
 import { actionTypes } from '../Reducer';
-import {useStateValue} from '../StateProvider'
+import { useStateValue } from '../StateProvider';
 import Information from './Information';
 
 const ExpandMore = styled((props) => {
@@ -28,7 +28,7 @@ const ExpandMore = styled((props) => {
 
 export default function Product({ products: { id, name, productType, image, price, description } }) {
 
-    const[{basket}, dispatch] = useStateValue();
+    const [{ basket }, dispatch] = useStateValue();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -49,14 +49,11 @@ export default function Product({ products: { id, name, productType, image, pric
         })
     }
 
-
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 400 }}>
             <CardHeader
                 action={
-                    <Typography
-                        variant='h5'
-                        color='textsecondary'>
+                    <Typography variant='h5' color='textsecondary'>
                         {accounting.formatMoney(price, "$")}
                     </Typography>
                 }
@@ -65,7 +62,7 @@ export default function Product({ products: { id, name, productType, image, pric
             />
             <CardMedia
                 component="img"
-                height="194"
+                height="200"
                 image={image}
             />
             <CardContent>
@@ -91,14 +88,8 @@ export default function Product({ products: { id, name, productType, image, pric
                     <Typography paragraph>
                         {description}
                     </Typography>
-
                 </CardContent>
-
-                
             </Collapse>
-            
         </Card>
-    
-            
     );
 }

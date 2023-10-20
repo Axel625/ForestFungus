@@ -9,7 +9,7 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
-import logo from "../Assets/Forest.png";
+import logo from "../Assets/Forest-preview.png";
 import { useStateValue } from '../StateProvider'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -32,10 +32,10 @@ const Navbar = () => {
   const [{ basket }] = useStateValue();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: 'green' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#ff7514' }}>
         <Toolbar>
           <Link to="/">
-            <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
+            <img src={logo} alt="Logo" style={{ width: '100px', marginRight: '10px' }} />
           </Link>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

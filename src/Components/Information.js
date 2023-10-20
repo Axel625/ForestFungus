@@ -24,15 +24,15 @@ export default function Information() {
         <Grid item xs={12} sm={12} md={12} lg={10}>
           <Item>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 300, textAlign: 'center', alignItems: 'center' }}>
+              <Card sx={{ maxWidth: 600, textAlign: 'center', border: 'none' }}>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Propuesta de valor
                   </Typography>
-                  <Typography variant="body2" color="text.secondary"><br />
+                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
                     Forest fungus ofrece una galleta funcional elaborada con camote y hongos cucumelo, que
-                    ayuda a proporcionar  un estado de tranquilidad a personas mayores de 18  al inducir un
-                    estado de relajación (Problemas de estrés, ansiedad y depresion)
+                    ayuda a proporcionar un estado de tranquilidad a personas mayores de 18 al inducir un
+                    estado de relajación (Problemas de estrés, ansiedad y depresión)
                   </Typography>
                 </CardContent>
               </Card>
@@ -42,34 +42,37 @@ export default function Information() {
         <Grid item xs={24} sm={12} md={10} lg={5}>
           <Item>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 400, textAlign: 'Center' }}>
+              <Card sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Mision
+                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
+                    Misión
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Elaborar productos alimenticios que permanezcan en la preferencia del consumidor,
+                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
+                    Forest Fungus ofrece productos alimenticios que permanezcan en la preferencia del consumidor,
                     por su innovación, sabor inigualable, calidad, frescura y función relajante hacia el estrés,
-                    ansiedad y problemas de depresión; siempre responsables con el cuidado del medio
-                    ambiente.<br /><br /><br />
+                    ansiedad y problemas de depresión; siempre responsables con el cuidado del ambiente.
+                    <br /><br /><br />
                   </Typography>
                 </CardContent>
               </Card>
+
             </Grid>
           </Item>
         </Grid>
         <Grid item xs={24} sm={12} md={10} lg={5}>
           <Item>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 400, textAlign: 'Center' }}>
+              <Card sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Vision
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Ser una empresa innovadora dentro del sector alimenticio, ofreciendo productos<br />
-                    horneados de calidad e innovación, siendo una empresa líder en la zona centro de la<br />
-                    República Mexicana.<br /><br /><br />
+                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
+
+                    Forest Fungus tiende a ser una empresa innovadora dentro del sector alimenticio,
+                    ofreciendo productos horneados de calidad,
+                    siendo empresa líder en la zona céntrica de la República Mexicana.
+                    <br /><br /><br /><br />
                   </Typography>
                 </CardContent>
               </Card>
@@ -79,12 +82,12 @@ export default function Information() {
         <Grid item xs={24} sm={12} md={10} lg={5} style={{ textAlign: 'left' }}>
           <Item>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 400, textAlign: 'left' }}>
+              <Card sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Valores
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
                     Fidelidad, creando una red de confianza.<br />
                     Orientación al cliente.<br />
                     Respeto en el área de trabajo y para nuestros consumidores.<br />
@@ -100,11 +103,11 @@ export default function Information() {
         <Grid item xs={24} sm={12} md={10} lg={5}>
           <Grid container justifyContent="center">
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                 Contacto
               </Typography>
               <Grid container justifyContent="center">
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
                   Dirección: Santa Maria Atarasquillo<br />
                   Ciudad: Lerma<br />
                   Teléfono: (729) 456-7890<br />

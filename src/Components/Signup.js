@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { Link as RouteLink, Outlet } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,33 +12,25 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as RouteLink} from 'react-router-dom';
+import { Copyright } from '@mui/icons-material';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <RouteLink color="inherit" href="https://mui.com/">
-        Your Website
-      </RouteLink>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+function SignUpForm({ onSubmit }) {
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
-
-export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    // Simula un registro exitoso
+    // Aquí, simplemente establecemos isRegistered en true y mostramos un mensaje.
+    setIsRegistered(true);
+    setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+
+    // Simula una redirección después de 2 segundos
+    setTimeout(() => {
+      onSubmit(); // Llama a la función de redirección proporcionada por el componente principal
+    }, 2000);
   };
 
   return (
@@ -128,6 +121,21 @@ export default function SignUp() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
+    </ThemeProvider>
+  );
+}
+
+const defaultTheme = createTheme();
+
+export default function SignUp() {
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <SignUpForm
+        onSubmit={() => {
+          // Redirige al usuario a la página de inicio de sesión
+          // Esto se hace declarativamente en el enrutador principal
+        }}
+      />
     </ThemeProvider>
   );
 }

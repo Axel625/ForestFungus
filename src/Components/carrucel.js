@@ -25,7 +25,7 @@ const ImageCarousel = () => {
       <Carousel
         autoPlay={true}
         infiniteLoop={true}
-        interval={5000}
+        interval={2000}
         showThumbs={false}
         showStatus={false}
         showArrows={true}
