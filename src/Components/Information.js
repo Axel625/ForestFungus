@@ -6,6 +6,8 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { Button, CardActions } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -72,7 +74,7 @@ export default function Information() {
                     Forest Fungus tiende a ser una empresa innovadora dentro del sector alimenticio,
                     ofreciendo productos horneados de calidad,
                     siendo empresa líder en la zona céntrica de la República Mexicana.
-                    <br /><br /><br /><br />
+                    <br /><br /><br /><br /><br />
                   </Typography>
                 </CardContent>
               </Card>
@@ -106,14 +108,15 @@ export default function Information() {
               <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                 Contacto
               </Typography>
-              <Grid container justifyContent="center">
+              <CardActions>
+                <Link to="/miebros_del_equipo">
                 <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-                  Dirección: Santa Maria Atarasquillo<br />
-                  Ciudad: Lerma<br />
-                  Teléfono: (729) 456-7890<br />
-                  Correo Electrónico: example@example.com
+                <Button size="small" color="primary">
+                  Show more
+                </Button>
                 </Typography>
-              </Grid>
+                </Link>
+              </CardActions>
             </CardContent>
           </Grid>
         </Grid>

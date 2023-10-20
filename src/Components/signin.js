@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as RouteLink} from 'react-router-dom';
+import { Link, Link as RouteLink} from 'react-router-dom';
 
 
 
@@ -72,6 +72,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Link to="/">
             <Button
               type="submit"
               fullWidth
@@ -80,6 +81,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            </Link>
             <Grid container>
               <Grid item xs>
                 <RouteLink href="#" variant="body2">

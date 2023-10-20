@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouteLink, Outlet } from 'react-router-dom';
+import { Link, Link as RouteLink } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -102,6 +102,7 @@ function SignUpForm({ onSubmit }) {
                 />
               </Grid>
             </Grid>
+            <Link to="/Inicio_de_Sesion">
             <Button
               type="submit"
               fullWidth
@@ -110,6 +111,7 @@ function SignUpForm({ onSubmit }) {
             >
               Sign Up
             </Button>
+            </Link>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <RouteLink to="/Inicio_de_Sesion">

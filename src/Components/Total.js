@@ -3,11 +3,22 @@ import accounting from "accounting";
 import { Button, Typography, Box } from "@mui/material";
 import { getBasketTotal } from "../Reducer";
 import { useStateValue } from '../StateProvider';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 
 const Total = () => {
-    const [{ basket }] = useStateValue();
+    const [{ basket, user }] = useStateValue(); // Agrega el estado de usuario
     const totalAmount = getBasketTotal(basket);
+    const navigate = useNavigate(); // Obtén la función de navegación
+
+    const handleCheckOut = () => {
+        if (user) {
+            // Si el usuario ha iniciado sesión, navega a la página de verificación
+            navigate("/Verificacion");
+        } else {
+            // Si el usuario no ha iniciado sesión, puedes mostrar un mensaje o realizar alguna acción
+            console.log("Inicia sesión para realizar el check out.");
+        }
+    };
 
     return (
         <Box
@@ -25,15 +36,14 @@ const Total = () => {
             <Typography variant="h4" color="primary">
                 {accounting.formatMoney(totalAmount, "$")}
             </Typography>
-            <Link to="/Verificacion">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ marginTop: "16px" }}
-                >
-                    Check Out
-                </Button>
-            </Link>
+            <Button
+                variant="contained"
+                color="primary"
+                style={{ marginTop: "16px" }}
+                onClick={handleCheckOut} // Maneja el evento del botón
+            >
+                Check Out
+            </Button>
         </Box>
     );
 }

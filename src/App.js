@@ -9,7 +9,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './Components/signin';
 import SignUp from './Components/Signup';
 import Checkout from './Components/CheckoutForm/Checkout';
-import Chatbot from './Components/Chatbot';
+import ChatBot from './Components/Chatbot';
+import Equipo from './Components/Equipo';
+
 
 
 const App = () => {
@@ -29,8 +31,8 @@ const App = () => {
           </Route>
           <Route path="/Verificacion" Component={Checkout}>
           </Route>
-          <Route path="/Bot" Component={Chatbot}>
-          </Route>
+          <Route path="/IA" Component={ChatBot} />
+          <Route path="/miebros_del_equipo" Component={Equipo} />
         </Routes>
         <Routes>
           <Route path="/" Component={Information}>
