@@ -42,7 +42,7 @@ const Total = () => {
                 style={{ marginTop: "16px" }}
                 onClick={handleCheckOut} // Maneja el evento del botón
             >
-                Check Out
+               Buy
             </Button>
         </Box>
     );
