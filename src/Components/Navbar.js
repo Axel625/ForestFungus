@@ -31,9 +31,6 @@ const linkStyle = {
   color: 'white',
 };
 
-const navbarButtonStyle = {
-  marginLeft: '10px',
-};
 
 const fabStyle = {
   backgroundColor: 'blue',
@@ -58,10 +55,7 @@ const menuStyle = {
   flex: 1, // Para que los botones del menú ocupen el espacio restante
 };
 
-const buttonContainerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-};
+
 
 const Navbar = () => {
   const [{ basket }] = useStateValue();

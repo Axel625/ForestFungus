@@ -3,7 +3,7 @@ import accounting from "accounting";
 import { Button, Typography, Box } from "@mui/material";
 import { getBasketTotal } from "../Reducer";
 import { useStateValue } from '../StateProvider';
-import { Link, useNavigate } from "react-router-dom"; 
+import {  useNavigate } from "react-router-dom"; 
 
 const Total = () => {
     const [{ basket, user }] = useStateValue(); // Agrega el estado de usuario
