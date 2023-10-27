@@ -37,7 +37,7 @@ const fabStyle = {
   color: 'white',
   width: '40px',
   height: '40px',
-  marginLeft: '10px', // Agrega margen izquierdo al ícono del chatbot
+  marginLeft: '10px', 
 };
 
 const navbarStyle = {
@@ -52,7 +52,7 @@ const logoStyle = {
 const menuStyle = {
   display: 'flex',
   alignItems: 'center',
-  flex: 1, // Para que los botones del menú ocupen el espacio restante
+  flex: 1, 
 };
 
 

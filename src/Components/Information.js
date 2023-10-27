@@ -9,24 +9,41 @@ import Grid from '@mui/material/Grid';
 import { Button, CardActions } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+const Footer = () => {
+  return (
+      <Card variant="outlined" sx={{ my: 4 }}>
+          <CardContent>
+              {/* Contenido de tu footer aquí */}
+              <Typography variant="body2" color="text.secondary" align="center">
+                  Contacto: ejemplo@correo.com
+              </Typography>
+          </CardContent>
+      </Card>
+  );
+}
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'yellow   ' ? '#1A2027' : '#fff',
+const CustomCard = styled(Card)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', // Cambia los colores de fondo según el modo
   ...theme.typography.body2,
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
   alignItems: 'center'
 }));
 
+const CustomBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', // Cambia los colores de fondo según el modo
+  padding: theme.spacing(2),
+  color: theme.palette.text.primary,
+}));
+
 export default function Information() {
   return (
-
     <Box sx={{ flexGrow: 1, display: 'static', justifyContent: 'center', alignItems: 'center' }}>
       <Grid container spacing={3} columns={10}>
         <Grid item xs={12} sm={12} md={12} lg={10}>
-          <Item>
+          <CustomBox>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 600, textAlign: 'center', border: 'none' }}>
+              <CustomCard sx={{ maxWidth: 600, textAlign: 'center', border: 'none' }}>
                 <CardContent>
                   <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Propuesta de valor
@@ -37,14 +54,14 @@ export default function Information() {
                     estado de relajación (Problemas de estrés, ansiedad y depresión)
                   </Typography>
                 </CardContent>
-              </Card>
+              </CustomCard>
             </Grid>
-          </Item>
+          </CustomBox>
         </Grid>
         <Grid item xs={24} sm={12} md={10} lg={5}>
-          <Item>
+          <CustomBox>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
+              <CustomCard sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
                 <CardContent>
                   <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Misión
@@ -56,35 +73,33 @@ export default function Information() {
                     <br /><br /><br />
                   </Typography>
                 </CardContent>
-              </Card>
-
+              </CustomCard>
             </Grid>
-          </Item>
+          </CustomBox>
         </Grid>
         <Grid item xs={24} sm={12} md={10} lg={5}>
-          <Item>
+          <CustomBox>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
+              <CustomCard sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
                 <CardContent>
                   <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Vision
                   </Typography>
                   <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-
                     Forest Fungus tiende a ser una empresa innovadora dentro del sector alimenticio,
                     ofreciendo productos horneados de calidad,
                     siendo empresa líder en la zona céntrica de la República Mexicana.
                     <br /><br /><br /><br /><br />
                   </Typography>
                 </CardContent>
-              </Card>
+              </CustomCard>
             </Grid>
-          </Item>
+          </CustomBox>
         </Grid>
         <Grid item xs={24} sm={12} md={10} lg={5} style={{ textAlign: 'left' }}>
-          <Item>
+          <CustomBox>
             <Grid container justifyContent="center">
-              <Card sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
+              <CustomCard sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
                 <CardContent>
                   <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Valores
@@ -98,30 +113,32 @@ export default function Information() {
                     Talento.
                   </Typography>
                 </CardContent>
-              </Card>
+              </CustomCard>
             </Grid>
-          </Item>
+          </CustomBox>
         </Grid>
         <Grid item xs={24} sm={12} md={10} lg={5}>
-          <Grid container justifyContent="center">
-            <CardContent>
-              <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
-                Contacto
-              </Typography>
-              <CardActions>
-                <Link to="/miebros_del_equipo">
-                <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-                <Button size="small" color="primary">
-                  Show more
-                </Button>
+          <CustomBox>
+            <Grid container justifyContent="center">
+              <CardContent>
+                <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
+                  Contacto
                 </Typography>
-                </Link>
-              </CardActions>
-            </CardContent>
-          </Grid>
+                <CardActions>
+                  <Link to="/miebros_del_equipo">
+                    <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
+                      <Button size="small" color="primary">
+                        <h1>Show more</h1>
+                      </Button>
+                    </Typography>
+                  </Link>
+                </CardActions>
+              </CardContent>
+            </Grid>
+          </CustomBox>
         </Grid>
       </Grid>
-    </Box >
-
+      <Footer />
+    </Box>
   );
 }

@@ -30,15 +30,15 @@ const Total = () => {
             borderRadius="4px"
             boxShadow="0px 0px 8px rgba(0, 0, 0, 0.1)"
         >
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" gutterBottom style={{ color: 'green' }}>
                 Total items: {basket?.length}
             </Typography>
-            <Typography variant="h4" color="primary">
+            <Typography variant="h4" color="primary" style={{ color: 'green' }}>
                 {accounting.formatMoney(totalAmount, "$")}
             </Typography>
             <Button
                 variant="contained"
-                color="primary"
+                color="success" // Cambia el color del botón a verde
                 style={{ marginTop: "16px" }}
                 onClick={handleCheckOut} // Maneja el evento del botón
             >
