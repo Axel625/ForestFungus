@@ -4,23 +4,13 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Button, CardActions } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
-  return (
-      <Card variant="outlined" sx={{ my: 4 }}>
-          <CardContent>
-              {/* Contenido de tu footer aquí */}
-              <Typography variant="body2" color="text.secondary" align="center">
-                  Contacto: ejemplo@correo.com
-              </Typography>
-          </CardContent>
-      </Card>
-  );
-}
+const Footer = styled(Card)({
+  marginTop: '20px', 
+});
 
 const CustomCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', // Cambia los colores de fondo según el modo
@@ -31,10 +21,12 @@ const CustomCard = styled(Card)(({ theme }) => ({
 }));
 
 const CustomBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', // Cambia los colores de fondo según el modo
-  padding: theme.spacing(2),
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#F5E9E2', // Use a pastel color for the background
+  padding: theme.spacing(1), // Reduce the padding to 1
   color: theme.palette.text.primary,
 }));
+
+
 
 export default function Information() {
   return (
@@ -128,7 +120,7 @@ export default function Information() {
                   <Link to="/miebros_del_equipo">
                     <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
                       <Button size="small" color="primary">
-                        <h1>Show more</h1>
+                        <h1>Show more</h1><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                       </Button>
                     </Typography>
                   </Link>
@@ -138,7 +130,22 @@ export default function Information() {
           </CustomBox>
         </Grid>
       </Grid>
-      <Footer />
+      <Footer variant="outlined">
+          <CardContent>
+            <Typography variant="body2" color="text.secondary" align="center">
+              Contacto: ejemplo@correo.com
+            </Typography>
+            <Typography variant="body2" color="text.secondary" align="center">
+             Nombre de la empresa: Forest Fungus
+            </Typography>
+            <Typography variant="body2" color="text.secondary" align="center">
+             Lugar: Capulhuac
+            </Typography>
+            <Typography variant="body2" color="text.secondary" align="center">
+             Telefono:725 659 4235
+            </Typography>
+          </CardContent>
+        </Footer>
     </Box>
   );
 }

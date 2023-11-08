@@ -3,7 +3,7 @@ import accounting from "accounting";
 import { Button, Typography, Box } from "@mui/material";
 import { getBasketTotal } from "../Reducer";
 import { useStateValue } from '../StateProvider';
-import {  useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 const Total = () => {
     const [{ basket, user }] = useStateValue(); // Agrega el estado de usuario
@@ -38,11 +38,10 @@ const Total = () => {
             </Typography>
             <Button
                 variant="contained"
-                color="success" // Cambia el color del botón a verde
-                style={{ marginTop: "16px" }}
-                onClick={handleCheckOut} // Maneja el evento del botón
+                color="success"
+                style={{ marginBottom: "8px", width: "100%" }}
             >
-               Buy
+                Buy
             </Button>
         </Box>
     );

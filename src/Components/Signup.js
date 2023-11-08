@@ -102,7 +102,7 @@ function SignUpForm({ onSubmit }) {
                 />
               </Grid>
             </Grid>
-            <Link to="/Inicio_de_Sesion">
+            <Link to="/Productos">
             <Button
               type="submit"
               fullWidth

@@ -13,19 +13,13 @@ import PaymentForm from '../CheckoutForm/Paymentform';
 import Review from './Review';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { styled } from "@mui/material/styles";
 
-const Footer = () => {
-    return (
-        <Card variant="outlined" sx={{ my: 4 }}>
-            <CardContent>
-                {/* Contenido de tu footer aquí */}
-                <Typography variant="body2" color="text.secondary" align="center">
-                    Contacto: ejemplo@correo.com
-                </Typography>
-            </CardContent>
-        </Card>
-    );
-}
+const Footer = styled(Card)({
+    marginTop: "20px",
+    marginBottom: "20px",
+});
+
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
@@ -102,7 +96,22 @@ export default function Checkout() {
                 </Paper>
 
             </Container>
-            <Footer />
+            <Footer variant="outlined">
+                <CardContent>
+                    <Typography variant="body2" color="text.secondary" align="center">
+                        Contacto: ejemplo@correo.com
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" align="center">
+                        Nombre de la empresa: Forest Fungus
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" align="center">
+                        Lugar: Capulhuac
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" align="center">
+                        Telefono: 725 659 4235
+                    </Typography>
+                </CardContent>
+            </Footer>
         </React.Fragment>
     );
 }

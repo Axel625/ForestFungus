@@ -5,13 +5,13 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import Product from './Product';
 import products from '../Product-data';
-import imagen1 from '../Assets/fondo.jpg'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 const Footer = styled(Card)({
-  marginTop: '20px', 
+  marginTop: "20px",
+  marginBottom: "20px",
 });
 
 
@@ -43,13 +43,13 @@ export default function Products() {
               Contacto: ejemplo@correo.com
             </Typography>
             <Typography variant="body2" color="text.secondary" align="center">
-             Nombre de la empresa
+             Nombre de la empresa: Forest Fungus
             </Typography>
             <Typography variant="body2" color="text.secondary" align="center">
-             Lugar
+             Lugar: Capulhuac
             </Typography>
             <Typography variant="body2" color="text.secondary" align="center">
-             Telefono
+             Telefono:725 659 4235
             </Typography>
           </CardContent>
         </Footer>
