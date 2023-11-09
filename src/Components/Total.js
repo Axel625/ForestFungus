@@ -38,7 +38,7 @@ const Total = () => {
             </Typography>
             <Button
                 variant="contained"
-                color="success"
+               color="success"
                 style={{ marginBottom: "8px", width: "100%" }}
             >
                 Buy

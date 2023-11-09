@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +15,7 @@ import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -31,13 +31,12 @@ const linkStyle = {
   color: 'white',
 };
 
-
 const fabStyle = {
   backgroundColor: 'blue',
   color: 'white',
   width: '40px',
   height: '40px',
-  marginLeft: '10px', 
+  marginLeft: '10px',
 };
 
 const navbarStyle = {
@@ -52,20 +51,27 @@ const logoStyle = {
 const menuStyle = {
   display: 'flex',
   alignItems: 'center',
-  flex: 1, 
+  flex: 1,
 };
-
-
 
 const Navbar = () => {
   const [{ basket }] = useStateValue();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  // Simula el estado de inicio de sesión
+  const [userIsLoggedIn, setUserIsLoggedIn] = React.useState(false);
+
+  // Función para iniciar sesión
+  const handleSignIn = () => {
+    // Agrega aquí la lógica real para iniciar sesión
+    setUserIsLoggedIn(true);
+    setAnchorEl(null);
   };
 
-  const handleClose = () => {
+  // Función para cerrar sesión
+  const handleSignOut = () => {
+    // Agrega aquí la lógica real para cerrar sesión
+    setUserIsLoggedIn(false);
     setAnchorEl(null);
   };
 
@@ -78,7 +84,9 @@ const Navbar = () => {
           </Link>
           <Box sx={menuStyle}>
             <Link to="/Productos" style={linkStyle}>
-              <Button color="inherit" variant="outlined">Products</Button>
+              <Button color="inherit" variant="outlined">
+                Products
+              </Button>
             </Link>
             <Link to="/IA" style={linkStyle}>
               <Fab color="primary" aria-label="add" sx={fabStyle}>
@@ -86,31 +94,43 @@ const Navbar = () => {
               </Fab>
             </Link>
           </Box>
-            <Menu
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <Link to="/Inicio_de_Sesion">
-                <MenuItem onClick={handleClose}>Sign In
-                </MenuItem>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+          >
+            {userIsLoggedIn ? (
+              <Link to="/">
+              <MenuItem onClick={handleSignOut}>
+                <ExitToAppIcon /> Cerrar sesión
+              </MenuItem>
               </Link>
-
-            </Menu>
-            <Link to="/Checkout-page" style={linkStyle}>
-              <IconButton aria-label="cart" color="inherit" variant="outlined">
-                <StyledBadge badgeContent={basket?.length} color="error">
-                  <ShoppingCartIcon />
-                </StyledBadge>
-              </IconButton>
-            </Link>
-            <IconButton color="inherit" variant="outlined" onClick={handleMenuClick}>
-              <AccountCircleIcon />
+            ) : (
+              <Link to="Inicio_de_Sesion">
+              <MenuItem onClick={handleSignIn}>
+                <AccountCircleIcon /> Iniciar sesión
+              </MenuItem>
+              </Link>
+            )}
+          </Menu>
+          <Link to="/Checkout-page" style={linkStyle}>
+            <IconButton aria-label="cart" color="inherit" variant="outlined">
+              <StyledBadge badgeContent={basket?.length} color="error">
+                <ShoppingCartIcon />
+              </StyledBadge>
             </IconButton>
+          </Link>
+          <IconButton
+            color="inherit"
+            variant="outlined"
+            onClick={(e) => setAnchorEl(e.currentTarget)}
+          >
+            <AccountCircleIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
   );
-}
+};
 
 export default Navbar;
