@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Link as RouteLink } from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Copyright } from '@mui/icons-material';
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000/register/',
+});
+
+const defaultTheme = createTheme();
 
 function SignUpForm({ onSubmit }) {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -22,15 +29,29 @@ function SignUpForm({ onSubmit }) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    // Simula un registro exitoso
-    // Aquí, simplemente establecemos isRegistered en true y mostramos un mensaje.
-    setIsRegistered(true);
-    setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+    // Realiza una solicitud POST a través de Axios
+    api.post('', {
+      first_name: data.get('first_name'),
+      last_name: data.get('last_name'),
+      email: data.get('email'),
+      password: data.get('password'),
+      username: data.get('username'),
+    })
+    .then((response) => {
+      console.log('Usuario creado con éxito', response.data);
 
-    // Simula una redirección después de 2 segundos
-    setTimeout(() => {
-      onSubmit(); // Llama a la función de redirección proporcionada por el componente principal
-    }, 2000);
+      // Establece el mensaje de éxito y redirige
+      setIsRegistered(true);
+      setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+
+      // Simula una redirección después de 2 segundos
+      setTimeout(() => {
+        onSubmit(); // Llama a la función de redirección proporcionada por el componente principal
+      }, 2000);
+    })
+    .catch((error) => {
+      console.error('Error al crear el usuario', error);
+    });
   };
 
   return (
@@ -56,10 +77,10 @@ function SignUpForm({ onSubmit }) {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="first_name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="first_name"
                   label="First Name"
                   autoFocus
                 />
@@ -68,9 +89,9 @@ function SignUpForm({ onSubmit }) {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="last_name"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -96,13 +117,23 @@ function SignUpForm({ onSubmit }) {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="username"
+                  label="UserName"
+                  type="username"
+                  id="username"
+                  autoComplete="username"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
-            <Link to="/Productos">
             <Button
               type="submit"
               fullWidth
@@ -111,14 +142,6 @@ function SignUpForm({ onSubmit }) {
             >
               Sign Up
             </Button>
-            </Link>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <RouteLink to="/Inicio_de_Sesion">
-                  Already have an account? Sign in
-                </RouteLink>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
@@ -127,17 +150,14 @@ function SignUpForm({ onSubmit }) {
   );
 }
 
-const defaultTheme = createTheme();
+// Si todo fue exitoso entonces:
+// Es como una tipo de condicional xd
+function SignUp() {
+  const handleRedirect = () => {
+    window.location.href = '/productos';
+  };
 
-export default function SignUp() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <SignUpForm
-        onSubmit={() => {
-          // Redirige al usuario a la página de inicio de sesión
-          // Esto se hace declarativamente en el enrutador principal
-        }}
-      />
-    </ThemeProvider>
-  );
+  return <SignUpForm onSubmit={handleRedirect} />;
 }
+
+export default SignUp;
