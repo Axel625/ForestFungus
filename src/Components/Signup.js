@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link as RouteLink } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Copyright } from '@mui/icons-material';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 
 const api = axios.create({
@@ -24,12 +24,19 @@ const defaultTheme = createTheme();
 function SignUpForm({ onSubmit }) {
   const [isRegistered, setIsRegistered] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setShowSuccess(false);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    // Realiza una solicitud POST a través de Axios
     api.post('', {
       first_name: data.get('first_name'),
       last_name: data.get('last_name'),
@@ -40,16 +47,16 @@ function SignUpForm({ onSubmit }) {
     .then((response) => {
       console.log('Usuario creado con éxito', response.data);
 
-      // Establece el mensaje de éxito y redirige
       setIsRegistered(true);
       setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+      setShowSuccess(true);
 
-      // Simula una redirección después de 2 segundos
       setTimeout(() => {
-        onSubmit(); // Llama a la función de redirección proporcionada por el componente principal
+        onSubmit();
       }, 2000);
     })
     .catch((error) => {
+      onSubmit();
       console.error('Error al crear el usuario', error);
     });
   };
@@ -142,16 +149,23 @@ function SignUpForm({ onSubmit }) {
             >
               Sign Up
             </Button>
+            <Snackbar open={showSuccess} autoHideDuration={6000} onClose={handleClose}>
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleClose}
+                severity="success"
+              >
+                {successMessage}
+              </MuiAlert>
+            </Snackbar>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
 }
 
-// Si todo fue exitoso entonces:
-// Es como una tipo de condicional xd
 function SignUp() {
   const handleRedirect = () => {
     window.location.href = '/productos';

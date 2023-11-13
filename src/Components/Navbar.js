@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import logo from '../Assets/Forest-preview.png';
-import { useStateValue } from '../StateProvider';
+import { useStateValue } from '../Stateprovider';
 import Fab from '@mui/material/Fab';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import Menu from '@mui/material/Menu';

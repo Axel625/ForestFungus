@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import CheckoutCard from './CheckoutCard';
 import Total from './Total';
-import { useStateValue } from '../StateProvider';
+import { useStateValue } from '../Stateprovider';
 import imagen1 from '../Assets/fondo.jpg';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';

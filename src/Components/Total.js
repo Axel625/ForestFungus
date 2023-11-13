@@ -2,7 +2,7 @@ import React from "react";
 import accounting from "accounting";
 import { Button, Typography, Box } from "@mui/material";
 import { getBasketTotal } from "../Reducer";
-import { useStateValue } from '../StateProvider';
+import { useStateValue } from '../Stateprovider';
 import { useNavigate } from "react-router-dom";
 
 const Total = () => {
