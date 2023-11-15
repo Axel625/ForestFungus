@@ -25,12 +25,14 @@ function SignUpForm({ onSubmit }) {
   const [isRegistered, setIsRegistered] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setShowSuccess(false);
+    setShowErrorAlert(false);
   };
 
   const handleSubmit = (event) => {
@@ -42,21 +44,24 @@ function SignUpForm({ onSubmit }) {
       password: data.get('password'),
       username: data.get('username'),
     })
-    .then((response) => {
-      console.log('Usuario creado con éxito', response.data);
+      .then((response) => {
+        console.log('Usuario creado con éxito', response.data);
 
-      setIsRegistered(true);
-      setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
-      setShowSuccess(true);
+        setIsRegistered(true);
+        setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+        setShowSuccess(true);
 
-      setTimeout(() => {
-        onSubmit();
-      }, 2000);
-    })
-    .catch((error) => {
-      onSubmit();
-      console.error('Error al crear el usuario', error);
-    });
+        setTimeout(() => {
+          onSubmit(true);
+        }, 2000);
+      })
+      .catch((error) => {
+        onSubmit(false);
+        console.error('Error al crear el usuario', error);
+
+        // Mostrar alerta de error
+        setShowErrorAlert(true);
+      });
   };
 
   return (
@@ -136,6 +141,24 @@ function SignUpForm({ onSubmit }) {
                 {successMessage}
               </MuiAlert>
             </Snackbar>
+
+            {/* Mostrar la alerta de error si showErrorAlert es true :) */}
+            <Snackbar
+              open={showErrorAlert}
+              autoHideDuration={4000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleClose}
+                severity="error"
+                sx={{ backgroundColor: 'red', color: 'white' }}
+              >
+                Lo siento, ha ocurrido un error al crear la cuenta D: Por favor, verifica tus datos e intenta nuevamente c:
+              </MuiAlert>
+            </Snackbar>
           </Box>
         </Box>
       </Container>
@@ -144,8 +167,13 @@ function SignUpForm({ onSubmit }) {
 }
 
 function SignUp() {
-  const handleRedirect = () => {
-    window.location.href = '/productos';
+  const handleRedirect = (redirect) => {
+
+    {/* Condicional para que el redirect se aplique, arriba solo cambiamos valores xdxd */}
+
+    if(redirect) {
+      window.location.href = '/productos';
+    }
   };
 
   return <SignUpForm onSubmit={handleRedirect} />;

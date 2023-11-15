@@ -20,12 +20,14 @@ const defaultTheme = createTheme();
 
 const SignIn = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setShowSuccessAlert(false);
+    setShowErrorAlert(false);
   };
 
   const handleSubmit = async (event) => {
@@ -59,10 +61,12 @@ const SignIn = () => {
       } else {
         console.error('El token no se recibió en la respuesta');
         // Puedes manejar el caso en que no se reciba el token, por ejemplo, mostrando un mensaje de error
+        setShowErrorAlert(true);
       }
     } catch (error) {
       console.error('Error al iniciar sesión', error);
       // Manejar el error, como mostrar un mensaje de error al usuario
+      setShowErrorAlert(true);
     }
   };
 
@@ -137,6 +141,25 @@ const SignIn = () => {
               >
                 ¡Has ingresado con éxito! Disfruta de nuestros productos :D
               </MuiAlert>
+            </Snackbar>
+            {/* Aquí mostramos el mensaje de error owo */}
+            <Snackbar
+            open={showErrorAlert}
+            autoHideDuration={2000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal:'left'}}>
+            
+            <MuiAlert
+              elevation={6}
+              variant="filled"
+              onClose={handleClose}
+              severity="error"
+              sx={{ backgroundColor: 'red', color: 'white' }}
+              >
+
+                Lo siento, las credenciales no coinciden :c Intenta de nuevo.
+
+            </MuiAlert>
             </Snackbar>
           </Box>
         </Box>
