@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,13 +9,20 @@ import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import logo from '../Assets/Forest-preview.png';
-import { useStateValue } from '../Stateprovider';
 import Fab from '@mui/material/Fab';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
+// Simulación de un contexto o estado compartido
+const useStateValue = () => {
+  // Simula un estado compartido, reemplaza con tu lógica real si estás usando un estado compartido
+  return {
+    basket: [] // Reemplaza [] con el valor real de tu estado compartido
+  };
+};
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -55,22 +62,18 @@ const menuStyle = {
 };
 
 const Navbar = () => {
-  const [{ basket }] = useStateValue();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { basket } = useStateValue(); // Obteniendo el valor de 'basket' del estado compartido
 
-  // Simula el estado de inicio de sesión
-  const [userIsLoggedIn, setUserIsLoggedIn] = React.useState(false);
-
-  // Función para iniciar sesión
   const handleSignIn = () => {
-    // Agrega aquí la lógica real para iniciar sesión
+    // Lógica para iniciar sesión (simulado aquí)
     setUserIsLoggedIn(true);
     setAnchorEl(null);
   };
 
-  // Función para cerrar sesión
   const handleSignOut = () => {
-    // Agrega aquí la lógica real para cerrar sesión
+    // Lógica para cerrar sesión (simulado aquí)
     setUserIsLoggedIn(false);
     setAnchorEl(null);
   };
@@ -100,11 +103,9 @@ const Navbar = () => {
             onClose={() => setAnchorEl(null)}
           >
             {userIsLoggedIn ? (
-              <Link to="/">
               <MenuItem onClick={handleSignOut}>
                 <ExitToAppIcon /> Cerrar sesión
               </MenuItem>
-              </Link>
             ) : (
               <Link to="Inicio_de_Sesion">
               <MenuItem onClick={handleSignIn}>

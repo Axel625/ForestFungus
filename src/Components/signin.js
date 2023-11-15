@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,19 +11,59 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link, Link as RouteLink} from 'react-router-dom';
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
+const SignIn = () => {
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setShowSuccessAlert(false);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const username = data.get('username');
+    const password = data.get('password');
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+        username,
+        password,
+      });
+
+      const token = response.data.token;
+
+      if (token) {
+        // Almacena el token en el almacenamiento local para su uso futuro
+        localStorage.setItem('token', token);
+
+        // Muestra la alerta de éxito
+        setShowSuccessAlert(true);
+
+        // Puedes ajustar el tiempo de visualización de la alerta si es necesario
+        setTimeout(() => {
+          setShowSuccessAlert(false);
+        }, 2000); // Mostrar la alerta por 2 segundos
+
+        // Redirige al usuario a la página de productos
+        window.location.href = '/productos';
+      } else {
+        console.error('El token no se recibió en la respuesta');
+        // Puedes manejar el caso en que no se reciba el token, por ejemplo, mostrando un mensaje de error
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión', error);
+      // Manejar el error, como mostrar un mensaje de error al usuario
+    }
   };
 
   return (
@@ -49,10 +89,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -69,7 +109,6 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link to="/">
             <Button
               type="submit"
               fullWidth
@@ -78,22 +117,32 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <Link to="/Registro">
+              {"Don't have an account? Sign Up"}
             </Link>
-            <Grid container>
-              <Grid item xs>
-                <RouteLink href="#" variant="body2">
-                  Forgot password?
-                </RouteLink>
-              </Grid>
-              <Grid item>
-               <RouteLink to="/Registro">
-                  {"Don't have an account? Sign Up"}
-                  </RouteLink>
-              </Grid>
-            </Grid>
+
+            {/* Mostrar la alerta de éxito si showSuccessAlert es true */}
+            <Snackbar
+              open={showSuccessAlert}
+              autoHideDuration={2000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleClose}
+                severity="success"
+                sx={{ backgroundColor: 'green', color: 'white' }}
+              >
+                ¡Has ingresado con éxito! Disfruta de nuestros productos :D
+              </MuiAlert>
+            </Snackbar>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default SignIn;

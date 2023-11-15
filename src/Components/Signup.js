@@ -16,7 +16,7 @@ import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/register/',
+  baseURL: 'http://127.0.0.1:8000/api/register/',
 });
 
 const defaultTheme = createTheme();
@@ -38,8 +38,6 @@ function SignUpForm({ onSubmit }) {
     const data = new FormData(event.currentTarget);
 
     api.post('', {
-      first_name: data.get('first_name'),
-      last_name: data.get('last_name'),
       email: data.get('email'),
       password: data.get('password'),
       username: data.get('username'),
@@ -81,27 +79,6 @@ function SignUpForm({ onSubmit }) {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="first_name"
-                  required
-                  fullWidth
-                  id="first_name"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="last_name"
-                  label="Last Name"
-                  name="last_name"
-                  autoComplete="family-name"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
