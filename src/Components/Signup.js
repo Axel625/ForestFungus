@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,40 +9,60 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as RouteLink } from 'react-router-dom';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 
-//NO MOVER AXIOS PORQUE YA SE CONSUME LA API BIEN
-
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/1.0/create_user/',
+  baseURL: 'http://127.0.0.1:8000/api/register/', 
 });
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
-  const handleSubmit = async (event) => {
+function SignUpForm({ onSubmit }) {
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setShowSuccess(false);
+    setShowErrorAlert(false);
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    try {
-      const response = await api.post('', {
-        first_name: data.get('first_name'),
-        last_name: data.get('last_name'),
-        email: data.get('email'),
-        password: data.get('password'),
+    api.post('', {
+      email: data.get('email'),
+      password: data.get('password'),
+      username: data.get('username'),
+      first_name: data.get('first_name'), 
+      last_name: data.get('last_name')
+    })
+      .then((response) => {
+        console.log('Usuario creado con éxito', response.data);
+
+        setIsRegistered(true);
+        setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+        setShowSuccess(true);
+
+        setTimeout(() => {
+          onSubmit(true);
+        }, 2000);
+      })
+      .catch((error) => {
+        onSubmit(false);
+        console.error('Error al crear el usuario', error);
+
+        // Mostrar alerta de error
+        setShowErrorAlert(true);
       });
-
-      
-      console.log('Usuario creado con éxito', response.data);
-    } catch (error) {
-      
-      console.error('Error al crear el usuario', error);
-    }
   };
-
-
-  //LOS CAMPOS DE FIRST NAME Y LAST NAME ESTABAN MAL CON EL BACKEND
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -65,27 +85,25 @@ export default function SignUp() {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-              <TextField
+                <TextField
                   autoComplete="given-name"
-                  name="first_name"  // Cambiar "firstName" a "first_name"
+                  name="first_name"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
                 />
-
               </Grid>
               <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="last_name"  // Cambiar "lastName" a "last_name"
-                autoComplete="family-name"
-              />
-
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="last_name"
+                  autoComplete="family-name"
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -108,6 +126,23 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="username"
+                  label="UserName"
+                  type="username"
+                  id="username"
+                  autoComplete="username"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -117,16 +152,49 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <RouteLink to="/Inicio_de_Sesion">
-                  Already have an account? Sign in
-                </RouteLink>
-              </Grid>
-            </Grid>
+            <Snackbar open={showSuccess} autoHideDuration={6000} onClose={handleClose}>
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleClose}
+                severity="success"
+              >
+                {successMessage}
+              </MuiAlert>
+            </Snackbar>
+
+            {/* Mostrar la alerta de error si showErrorAlert es true :) */}
+            <Snackbar
+              open={showErrorAlert}
+              autoHideDuration={4000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleClose}
+                severity="error"
+                sx={{ backgroundColor: 'red', color: 'white' }}
+              >
+                Lo siento, ha ocurrido un error al crear la cuenta D: Por favor, verifica tus datos e intenta nuevamente c:
+              </MuiAlert>
+            </Snackbar>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
 }
+
+function SignUp() {
+  const handleRedirect = (redirect) => {
+    if(redirect) {
+      window.location.href = '/productos'; 
+    }
+  };
+
+  return <SignUpForm onSubmit={handleRedirect} />;
+}
+
+export default SignUp;

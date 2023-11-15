@@ -1,3 +1,5 @@
+import galleta1 from './Assets/azul.jpg';
+import galleta2 from './Assets/naranja.jpg'
 const products = [
     {
         id: 1,
@@ -5,8 +7,8 @@ const products = [
          productType: "Galletas",
          price: 50,
          image:
-         "https://static.13c.cl/sites/default/files/13c/articulos/field-imagen/2017-01/galletas_camote.jpg",
-         description:"Galletas de camote naranja y morado con hongos",
+         galleta1,
+         description:"Galletas de camote morado y naranja cada empaque (120gr) y por una porción de 100 gr",
     },
     {
         id: 2,
@@ -14,8 +16,8 @@ const products = [
          productType: "Galletas",
          price: 45,
          image:
-         "https://1.bp.blogspot.com/-G-oHfQcwDZE/XrF_SjfTwOI/AAAAAAAAAr8/2qyBOEDT5GkJFziLiz8tfdF0il1HmC-DgCK4BGAsYHg/w1200-h630-p-k-no-nu/GALLETAS%2BO%2BCOOKIES%2BCON%2BCHIPS%2BDE%2BCHOCOLATE.jpg",
-         description:" Galletas de camote naranja sin hongos",
+         galleta2,
+         description:" Galletas de camote naranja sin hongos cada empaque (120gr) y por una porción de 100 gr",
     },
 ]
 export default products;

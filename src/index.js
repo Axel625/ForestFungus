@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { StateProvider } from './StateProvider';
+import { StateProvider } from './Stateprovider';
 import reducer,{initialState} from './Reducer';
 
 
