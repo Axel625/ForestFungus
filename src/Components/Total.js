@@ -6,18 +6,13 @@ import { useStateValue } from '../StateProvider';
 import { useNavigate } from "react-router-dom";
 
 const Total = () => {
-    const [{ basket, user }] = useStateValue(); // Agrega el estado de usuario
+    const [{ basket }] = useStateValue(); 
     const totalAmount = getBasketTotal(basket);
-    const navigate = useNavigate(); // Obtén la función de navegación
+    const navigate = useNavigate(); 
 
     const handleCheckOut = () => {
-        if (user) {
-            // Si el usuario ha iniciado sesión, navega a la página de verificación
-            navigate("/Verificacion");
-        } else {
-            // Si el usuario no ha iniciado sesión, puedes mostrar un mensaje o realizar alguna acción
-            console.log("Inicia sesión para realizar el check out.");
-        }
+        
+        navigate("/Verificacion");
     };
 
     return (
@@ -38,8 +33,9 @@ const Total = () => {
             </Typography>
             <Button
                 variant="contained"
-               color="success"
+                color="success"
                 style={{ marginBottom: "8px", width: "100%" }}
+                onClick={handleCheckOut} // Asigna la función de manejo al evento onClick
             >
                 Buy
             </Button>

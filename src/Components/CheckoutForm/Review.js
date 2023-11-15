@@ -8,9 +8,9 @@ import { useStateValue } from "../../StateProvider";
 import accounting from 'accounting';
 
 const Review = () => {
-  const [{ basket }] = useStateValue(); // Asegúrate de que basket esté en el estado
+  const [{ basket }] = useStateValue(); 
 
-  const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0; // Verifica si basket está definido
+  const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0; 
 
   const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
   const payments = [

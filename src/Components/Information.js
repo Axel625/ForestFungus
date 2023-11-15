@@ -5,11 +5,10 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Button, CardActions } from '@mui/material';
-import { Link } from 'react-router-dom';
+
 
 const Footer = styled(Card)({
-  marginTop: '20px', 
+  marginTop: '20px',
 });
 
 const CustomCard = styled(Card)(({ theme }) => ({
@@ -88,10 +87,10 @@ export default function Information() {
             </Grid>
           </CustomBox>
         </Grid>
-        <Grid item xs={24} sm={12} md={10} lg={5} style={{ textAlign: 'left' }}>
+        <Grid item xs={12} sm={12} md={12} lg={10}>
           <CustomBox>
             <Grid container justifyContent="center">
-              <CustomCard sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
+              <CustomCard sx={{ maxWidth: 600, textAlign: 'center', border: 'none' }}>
                 <CardContent>
                   <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
                     Valores
@@ -109,43 +108,23 @@ export default function Information() {
             </Grid>
           </CustomBox>
         </Grid>
-        <Grid item xs={24} sm={12} md={10} lg={5}>
-          <CustomBox>
-            <Grid container justifyContent="center">
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
-                  Contacto
-                </Typography>
-                <CardActions>
-                  <Link to="/miebros_del_equipo">
-                    <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-                      <Button size="small" color="primary">
-                        <h1>Show more</h1><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                      </Button>
-                    </Typography>
-                  </Link>
-                </CardActions>
-              </CardContent>
-            </Grid>
-          </CustomBox>
-        </Grid>
       </Grid>
       <Footer variant="outlined">
-          <CardContent>
-            <Typography variant="body2" color="text.secondary" align="center">
-              Contacto: ejemplo@correo.com
-            </Typography>
-            <Typography variant="body2" color="text.secondary" align="center">
-             Nombre de la empresa: Forest Fungus
-            </Typography>
-            <Typography variant="body2" color="text.secondary" align="center">
-             Lugar: Capulhuac
-            </Typography>
-            <Typography variant="body2" color="text.secondary" align="center">
-             Telefono:725 659 4235
-            </Typography>
-          </CardContent>
-        </Footer>
+        <CardContent>
+          <Typography variant="body2" color="text.secondary" align="center">
+            Contacto: ejemplo@correo.com
+          </Typography>
+          <Typography variant="body2" color="text.secondary" align="center">
+            Nombre de la empresa: Forest Fungus
+          </Typography>
+          <Typography variant="body2" color="text.secondary" align="center">
+            Lugar: Capulhuac
+          </Typography>
+          <Typography variant="body2" color="text.secondary" align="center">
+            Telefono:725 659 4235
+          </Typography>
+        </CardContent>
+      </Footer>
     </Box>
   );
 }

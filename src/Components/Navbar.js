@@ -58,19 +58,19 @@ const Navbar = () => {
   const [{ basket }] = useStateValue();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  // Simula el estado de inicio de sesión
+  
   const [userIsLoggedIn, setUserIsLoggedIn] = React.useState(false);
 
-  // Función para iniciar sesión
+  
   const handleSignIn = () => {
-    // Agrega aquí la lógica real para iniciar sesión
+   
     setUserIsLoggedIn(true);
     setAnchorEl(null);
   };
 
-  // Función para cerrar sesión
+
   const handleSignOut = () => {
-    // Agrega aquí la lógica real para cerrar sesión
+   
     setUserIsLoggedIn(false);
     setAnchorEl(null);
   };
