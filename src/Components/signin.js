@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -14,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
@@ -39,33 +40,25 @@ const SignIn = () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/login/', {
         username,
-        password,
+        password  
       });
 
       const token = response.data.token;
 
       if (token) {
-        // Almacena el token en el almacenamiento local para su uso futuro
         localStorage.setItem('token', token);
 
-        // Muestra la alerta de éxito
         setShowSuccessAlert(true);
 
-        // Puedes ajustar el tiempo de visualización de la alerta si es necesario
         setTimeout(() => {
           setShowSuccessAlert(false);
-        }, 2000); // Mostrar la alerta por 2 segundos
-
-        // Redirige al usuario a la página de productos
-        window.location.href = '/productos';
+          window.location.href = '/productos';
+        }, 2000);
       } else {
-        console.error('El token no se recibió en la respuesta');
-        // Puedes manejar el caso en que no se reciba el token, por ejemplo, mostrando un mensaje de error
         setShowErrorAlert(true);
       }
     } catch (error) {
       console.error('Error al iniciar sesión', error);
-      // Manejar el error, como mostrar un mensaje de error al usuario
       setShowErrorAlert(true);
     }
   };
@@ -121,45 +114,49 @@ const SignIn = () => {
             >
               Sign In
             </Button>
-            <Link to="/Registro">
-              {"Don't have an account? Sign Up"}
-            </Link>
-
-            {/* Mostrar la alerta de éxito si showSuccessAlert es true */}
+            <Grid container>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <RouterLink to="/registro">
+                  Don't have an account? Sign Up
+                </RouterLink>  
+              </Grid>
+            </Grid>
+            
             <Snackbar
               open={showSuccessAlert}
               autoHideDuration={2000}
               onClose={handleClose}
               anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             >
-              <MuiAlert
+              <MuiAlert 
                 elevation={6}
                 variant="filled"
-                onClose={handleClose}
                 severity="success"
                 sx={{ backgroundColor: 'green', color: 'white' }}
               >
-                ¡Has ingresado con éxito! Disfruta de nuestros productos :D
+                ¡Has ingresado con éxito! Disfruta de nuestros productos  
               </MuiAlert>
             </Snackbar>
-            {/* Aquí mostramos el mensaje de error owo */}
+
             <Snackbar
-            open={showErrorAlert}
-            autoHideDuration={2000}
-            onClose={handleClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal:'left'}}>
-            
-            <MuiAlert
-              elevation={6}
-              variant="filled"
+              open={showErrorAlert}
+              autoHideDuration={2000}
               onClose={handleClose}
-              severity="error"
-              sx={{ backgroundColor: 'red', color: 'white' }}
+              anchorOrigin={{ vertical: 'bottom', horizontal:'left' }}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                severity="error"
+                sx={{ backgroundColor: 'red', color: 'white' }}
               >
-
-                Lo siento, las credenciales no coinciden :c Intenta de nuevo.
-
-            </MuiAlert>
+                Lo siento, las credenciales no coinciden. Intenta de nuevo.
+              </MuiAlert>
             </Snackbar>
           </Box>
         </Box>
