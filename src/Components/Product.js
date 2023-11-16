@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import accounting from 'accounting';
 import { AddShoppingCart } from '@mui/icons-material';
 import { actionTypes } from '../Reducer';
-import { useStateValue } from '../StateProvider';
+import { useStateValue } from '../Stateprovider';
 import Information from './Information';
 
 const ExpandMore = styled((props) => {

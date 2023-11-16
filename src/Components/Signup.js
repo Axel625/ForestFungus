@@ -9,10 +9,11 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { FormControlLabel, Checkbox } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
-import { FormControlLabel, Checkbox } from '@material-ui/core';
+
 
 const api = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/register/', 
@@ -42,8 +43,7 @@ function SignUpForm({ onSubmit }) {
       email: data.get('email'),
       password: data.get('password'),
       username: data.get('username'),
-      first_name: data.get('first_name'), 
-      last_name: data.get('last_name')
+      
     })
       .then((response) => {
         console.log('Usuario creado con éxito', response.data);
@@ -85,27 +85,7 @@ function SignUpForm({ onSubmit }) {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="first_name"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="last_name"
-                  autoComplete="family-name"
-                />
-              </Grid>
+              
               <Grid item xs={12}>
                 <TextField
                   required

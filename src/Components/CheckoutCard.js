@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import accounting from 'accounting';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useStateValue } from '../StateProvider';
+import { useStateValue } from '../Stateprovider';
 import { actionTypes } from '../Reducer';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
