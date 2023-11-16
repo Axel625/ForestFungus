@@ -1,36 +1,68 @@
 import React, { useState } from 'react';
-import { Link, Link as RouteLink } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Copyright } from '@mui/icons-material';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import axios from 'axios';
+import { FormControlLabel, Checkbox } from '@material-ui/core';
+
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api/register/', 
+});
+
+const defaultTheme = createTheme();
 
 function SignUpForm({ onSubmit }) {
   const [isRegistered, setIsRegistered] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setShowSuccess(false);
+    setShowErrorAlert(false);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    // Simula un registro exitoso
-    // Aquí, simplemente establecemos isRegistered en true y mostramos un mensaje.
-    setIsRegistered(true);
-    setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+    api.post('', {
+      email: data.get('email'),
+      password: data.get('password'),
+      username: data.get('username'),
+      first_name: data.get('first_name'), 
+      last_name: data.get('last_name')
+    })
+      .then((response) => {
+        console.log('Usuario creado con éxito', response.data);
 
-    // Simula una redirección después de 2 segundos
-    setTimeout(() => {
-      onSubmit(); // Llama a la función de redirección proporcionada por el componente principal
-    }, 2000);
+        setIsRegistered(true);
+        setSuccessMessage('Registro exitoso. Redirigiendo a la página de inicio de sesión...');
+        setShowSuccess(true);
+
+        setTimeout(() => {
+          onSubmit(true);
+        }, 2000);
+      })
+      .catch((error) => {
+        onSubmit(false);
+        console.error('Error al crear el usuario', error);
+
+        // Mostrar alerta de error
+        setShowErrorAlert(true);
+      });
   };
 
   return (
@@ -46,7 +78,7 @@ function SignUpForm({ onSubmit }) {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <PersonAddIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -56,7 +88,7 @@ function SignUpForm({ onSubmit }) {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="first_name"
                   required
                   fullWidth
                   id="firstName"
@@ -70,7 +102,7 @@ function SignUpForm({ onSubmit }) {
                   fullWidth
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -96,13 +128,23 @@ function SignUpForm({ onSubmit }) {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="username"
+                  label="UserName"
+                  type="username"
+                  id="username"
+                  autoComplete="username"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
-            <Link to="/Productos">
             <Button
               type="submit"
               fullWidth
@@ -111,33 +153,49 @@ function SignUpForm({ onSubmit }) {
             >
               Sign Up
             </Button>
-            </Link>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <RouteLink to="/Inicio_de_Sesion">
-                  Already have an account? Sign in
-                </RouteLink>
-              </Grid>
-            </Grid>
+            <Snackbar open={showSuccess} autoHideDuration={6000} onClose={handleClose}>
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleClose}
+                severity="success"
+              >
+                {successMessage}
+              </MuiAlert>
+            </Snackbar>
+
+            {/* Mostrar la alerta de error si showErrorAlert es true :) */}
+            <Snackbar
+              open={showErrorAlert}
+              autoHideDuration={4000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleClose}
+                severity="error"
+                sx={{ backgroundColor: 'red', color: 'white' }}
+              >
+                Lo siento, ha ocurrido un error al crear la cuenta D: Por favor, verifica tus datos e intenta nuevamente c:
+              </MuiAlert>
+            </Snackbar>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
 }
 
-const defaultTheme = createTheme();
+function SignUp() {
+  const handleRedirect = (redirect) => {
+    if(redirect) {
+      window.location.href = '/productos'; 
+    }
+  };
 
-export default function SignUp() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <SignUpForm
-        onSubmit={() => {
-          // Redirige al usuario a la página de inicio de sesión
-          // Esto se hace declarativamente en el enrutador principal
-        }}
-      />
-    </ThemeProvider>
-  );
+  return <SignUpForm onSubmit={handleRedirect} />;
 }
+
+export default SignUp;

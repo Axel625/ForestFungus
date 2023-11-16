@@ -1,29 +1,66 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link, Link as RouteLink} from 'react-router-dom';
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import axios from 'axios';
+import { Link as RouterLink } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
+const SignIn = () => {
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setShowSuccessAlert(false);
+    setShowErrorAlert(false);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const username = data.get('username');
+    const password = data.get('password');
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+        username,
+        password  
+      });
+
+      const token = response.data.token;
+
+      if (token) {
+        localStorage.setItem('token', token);
+
+        setShowSuccessAlert(true);
+
+        setTimeout(() => {
+          setShowSuccessAlert(false);
+          window.location.href = '/productos';
+        }, 2000);
+      } else {
+        setShowErrorAlert(true);
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión', error);
+      setShowErrorAlert(true);
+    }
   };
 
   return (
@@ -49,10 +86,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -69,7 +106,6 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link to="/">
             <Button
               type="submit"
               fullWidth
@@ -78,22 +114,55 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            </Link>
             <Grid container>
-              <Grid item xs>
-                <RouteLink href="#" variant="body2">
+              <Grid item>
+                <Link href="#" variant="body2">
                   Forgot password?
-                </RouteLink>
+                </Link>
               </Grid>
               <Grid item>
-               <RouteLink to="/Registro">
-                  {"Don't have an account? Sign Up"}
-                  </RouteLink>
+                <RouterLink to="/registro">
+                  Don't have an account? Sign Up
+                </RouterLink>  
               </Grid>
             </Grid>
+            
+            <Snackbar
+              open={showSuccessAlert}
+              autoHideDuration={2000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            >
+              <MuiAlert 
+                elevation={6}
+                variant="filled"
+                severity="success"
+                sx={{ backgroundColor: 'green', color: 'white' }}
+              >
+                ¡Has ingresado con éxito! Disfruta de nuestros productos  
+              </MuiAlert>
+            </Snackbar>
+
+            <Snackbar
+              open={showErrorAlert}
+              autoHideDuration={2000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: 'bottom', horizontal:'left' }}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                severity="error"
+                sx={{ backgroundColor: 'red', color: 'white' }}
+              >
+                Lo siento, las credenciales no coinciden. Intenta de nuevo.
+              </MuiAlert>
+            </Snackbar>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default SignIn;
