@@ -1,18 +1,19 @@
+// PaymentForm.js
+
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControl from "@mui/material/FormControl";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useStateValue } from "../../Stateprovider"; // Ajusta la ruta según tu estructura
 
 export default function PaymentForm() {
-  const [paymentMethod, setPaymentMethod] = React.useState("creditCard");
+  const [{ total }, dispatch] = useStateValue();
+  const [showPayPalButton, setShowPayPalButton] = React.useState(false);
 
-  const handlePaymentMethodChange = (event) => {
-    setPaymentMethod(event.target.value);
+  const handlePayPalCheckboxChange = () => {
+    setShowPayPalButton(!showPayPalButton);
   };
 
   return (
@@ -20,92 +21,31 @@ export default function PaymentForm() {
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
-      <FormControl component="fieldset">
-        <RadioGroup
-          aria-label="payment-method"
-          name="payment-method"
-          value={paymentMethod}
-          onChange={handlePaymentMethodChange}
-        >
-          <FormControlLabel
-            value="creditCard"
-            control={<Radio color="primary" />}
-            label="Credit Card"
-          />
-          <FormControlLabel
-            value="paypal"
-            control={<Radio color="primary" />}
-            label="PayPal"
-          />
-          {/* Agrega más métodos de pago aquí si es necesario */}
-        </RadioGroup>
-      </FormControl>
-      {paymentMethod === "creditCard" && (
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              id="cardName"
-              label="Name on card"
-              fullWidth
-              autoComplete="cc-name"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              id="cardNumber"
-              label="Card number"
-              fullWidth
-              autoComplete="cc-number"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              id="expDate"
-              label="Expiry date"
-              fullWidth
-              autoComplete="cc-exp"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              id="cvv"
-              label="CVV"
-              helperText="Last three digits on signature strip"
-              fullWidth
-              autoComplete="cc-csc"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox color="secondary" name="saveCard" value="yes" />
-              }
-              label="Remember credit card details for next time"
-            />
-          </Grid>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom>
+            Total: {total} {/* Muestra el total */}
+          </Typography>
         </Grid>
-      )}
-      {paymentMethod === "paypal" && (
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="paypalEmail"
-              label="PayPal Email"
-              fullWidth
-              autoComplete="email"
-              variant="standard"
-            />
-          </Grid>
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                color="secondary"
+                checked={showPayPalButton}
+                onChange={handlePayPalCheckboxChange}
+              />
+            }
+            label="Tengo una cuenta PayPal y deseo pagar con ella"
+          />
         </Grid>
+      </Grid>
+
+      {showPayPalButton && (
+        <PayPalScriptProvider options={{ clientId: "AcoIHbHcpZtMDEOLlcP50_yRYh3e6GxJwGXV0l-qBONXSKEsqyhKpKoCcs-AD4p7QHxssxAwmZCSGomY" }}>
+          <PayPalButtons style={{ layout: "horizontal" }} />
+        </PayPalScriptProvider>
       )}
     </React.Fragment>
   );

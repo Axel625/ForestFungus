@@ -6,16 +6,18 @@ import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 import { useStateValue } from "../../Stateprovider";
 import accounting from 'accounting';
+import { actionTypes } from '../../Reducer';
 
 const Review = () => {
-  const [{ basket }] = useStateValue(); 
+  const [{ basket }, dispatch] = useStateValue();
 
-  const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0; 
+  const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0;
 
-  const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-  const payments = [
-    
-  ];
+  // Actualiza el contexto con el total
+  dispatch({
+    type: actionTypes.SET_TOTAL,
+    total: totalAmount,
+  });
 
   return (
     <React.Fragment>
