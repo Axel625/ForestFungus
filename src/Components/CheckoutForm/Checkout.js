@@ -91,6 +91,15 @@ export default function Checkout() {
                 </Paper>
 
             </Container>
+            <div>
+            <Button
+                                    variant="contained"
+                                    onClick={handleNext}
+                                    sx={{ mt: 3, ml: 1 }}
+                                >
+                                   Distraete jugando un rato
+                                </Button>
+            </div>
             <Footer variant="outlined">
                 <CardContent>
                     <Typography variant="body2" color="text.secondary" align="center">

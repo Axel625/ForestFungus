@@ -12,7 +12,7 @@ const Review = () => {
 
   const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0; 
 
-  const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
+
   const payments = [
     
   ];

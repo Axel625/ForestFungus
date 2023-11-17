@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,22 +8,13 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
-import logo from '../Assets/Forest-preview.png';
 import Fab from '@mui/material/Fab';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
-// Simulación de un contexto o estado compartido
-const useStateValue = () => {
-  return {
-    basket: [] 
-  };
-};
-
+import logo from '../Assets/Forest.png';
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: -3,
@@ -63,7 +55,7 @@ const menuStyle = {
 const Navbar = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { basket } = useStateValue();
+  const [basket, setBasket] = useState([]);
 
   const handleSignIn = () => {
     setUserIsLoggedIn(true);
@@ -94,7 +86,7 @@ const Navbar = () => {
               </Fab>
             </Link>
           </Box>
-          
+
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
@@ -105,22 +97,22 @@ const Navbar = () => {
                 <ExitToAppIcon /> Cerrar sesión
               </MenuItem>
             ) : (
-              <Link to="Inicio_de_Sesion">
+              <Link to="Inicio_de_Sesion" style={linkStyle}>
                 <MenuItem onClick={handleSignIn}>
                   <AccountCircleIcon /> Iniciar sesión
                 </MenuItem>
               </Link>
             )}
           </Menu>
-          
+
           <Link to="/Checkout-page" style={linkStyle}>
             <IconButton aria-label="cart" color="inherit" variant="outlined">
-              <StyledBadge badgeContent={basket?.length} color="error">
+              <StyledBadge badgeContent={basket.length} color="error">
                 <ShoppingCartIcon />
               </StyledBadge>
             </IconButton>
           </Link>
-          
+
           <IconButton
             color="inherit"
             variant="outlined"
