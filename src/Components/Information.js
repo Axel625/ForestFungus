@@ -1,114 +1,133 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useSpring, animated } from 'react-spring';
 
 const Footer = styled(Card)({
   marginTop: '20px',
 });
 
-const CustomCard = styled(Card)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', // Cambia los colores de fondo según el modo
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
-  alignItems: 'center'
-}));
+const AnimatedCard = animated(Card);
 
-const CustomBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#F5E9E2', // Use a pastel color for the background
-  padding: theme.spacing(1), // Reduce the padding to 1
-  color: theme.palette.text.primary,
-}));
+const CustomCard = styled(AnimatedCard)`
+  background-color: ${({ theme }) => theme.palette.background.paper};
+  padding: ${({ theme }) => theme.spacing(2)};
+  text-align: center;
+  border-radius: 16px;
+  transition: transform 0.3s;
 
-
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
 
 export default function Information() {
+  const props = useSpring({ opacity: 1, from: { opacity: 0 } });
+
   return (
-    <Box sx={{ flexGrow: 1, display: 'static', justifyContent: 'center', alignItems: 'center' }}>
-      <Grid container spacing={3} columns={10}>
-        <Grid item xs={12} sm={12} md={12} lg={10}>
-          <CustomBox>
-            <Grid container justifyContent="center">
-              <CustomCard sx={{ maxWidth: 600, textAlign: 'center', border: 'none' }}>
-                <CardContent>
-                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
-                    Propuesta de valor
-                  </Typography>
-                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-                    Forest fungus ofrece una galleta funcional elaborada con camote y hongos cucumelo, que
-                    ayuda a proporcionar un estado de tranquilidad a personas mayores de 18 al inducir un
-                    estado de relajación (Problemas de estrés, ansiedad y depresión)
-                  </Typography>
-                </CardContent>
-              </CustomCard>
-            </Grid>
-          </CustomBox>
+    <Box sx={{ width: '100%' }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <CustomCard
+            style={props}
+            sx={{ bgcolor: '#f3d2c1' }}
+          >
+            <Avatar
+              variant="rounded"
+              sx={{ width: 100, height: 100, m: '0 auto' }}
+            >
+              <AssignmentIcon sx={{ fontSize: 60 }} />
+            </Avatar>
+
+            <Typography variant="h4">Propuesta de Valor</Typography>
+
+            <Typography variant="h6" color="text.secondary" style={{ textAlign: 'center' }}>
+              Forest fungus ofrece una galleta funcional elaborada con camote y hongos cucumelo,<br/> 
+              que ayuda a proporcionar un estado de tranquilidad a personas mayores de 18 al inducir un estado de relajación.
+            </Typography>
+          </CustomCard>
         </Grid>
-        <Grid item xs={24} sm={12} md={10} lg={5}>
-          <CustomBox>
-            <Grid container justifyContent="center">
-              <CustomCard sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
-                <CardContent>
-                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
-                    Misión
-                  </Typography>
-                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-                    Forest Fungus ofrece productos alimenticios que permanezcan en la preferencia del consumidor,
-                    por su innovación, sabor inigualable, calidad, frescura y función relajante hacia el estrés,
-                    ansiedad y problemas de depresión; siempre responsables con el cuidado del ambiente.
-                    <br /><br /><br />
-                  </Typography>
-                </CardContent>
-              </CustomCard>
-            </Grid>
-          </CustomBox>
+
+        <Grid item xs={6}>
+          <CustomCard
+            style={props}
+            sx={{ bgcolor: '#d7e9f7' }}
+          >
+            <Avatar
+              variant="square"
+              sx={{ width: 100, height: 100, m: '0 auto' }}
+            >
+              <VisibilityIcon sx={{ fontSize: 60 }} />
+            </Avatar>
+
+            <Typography variant="h4">Misión</Typography>
+
+            <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
+              Forest Fungus ofrece productos alimenticios que permanezcan en la preferencia del consumidor,<br/> 
+              por su innovación, sabor inigualable, calidad, frescura y función relajante hacia el estrés,<br/> 
+              ansiedad y problemas de depresión; siempre responsables con el cuidado del ambiente.
+            </Typography>
+          </CustomCard>
         </Grid>
-        <Grid item xs={24} sm={12} md={10} lg={5}>
-          <CustomBox>
-            <Grid container justifyContent="center">
-              <CustomCard sx={{ maxWidth: 500, textAlign: 'Left', border: 'none' }}>
-                <CardContent>
-                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
-                    Vision
-                  </Typography>
-                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-                    Forest Fungus tiende a ser una empresa innovadora dentro del sector alimenticio,
-                    ofreciendo productos horneados de calidad,
-                    siendo empresa líder en la zona céntrica de la República Mexicana.
-                    <br /><br /><br /><br /><br />
-                  </Typography>
-                </CardContent>
-              </CustomCard>
-            </Grid>
-          </CustomBox>
+
+        <Grid item xs={6}>
+          <CustomCard
+            style={props}
+            sx={{ bgcolor: '#f6f2d4' }}
+          >
+            <Avatar
+              variant="rounded"
+              sx={{ width: 100, height: 100, m: '0 auto', bgcolor: 'primary.main' }}
+            >
+              <FavoriteIcon sx={{ fontSize: 60 }} />
+            </Avatar>
+
+            <Typography variant="h4" color="textPrimary">
+              Visión
+            </Typography>
+
+            <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
+              Forest Fungus tiende a ser una empresa innovadora dentro del sector alimenticio,<br/>
+              ofreciendo productos horneados de calidad, siendo empresa líder en la zona céntrica de la República Mexicana.
+              <br/><br/><br/>
+            </Typography>
+          </CustomCard>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={10}>
-          <CustomBox>
-            <Grid container justifyContent="center">
-              <CustomCard sx={{ maxWidth: 600, textAlign: 'center', border: 'none' }}>
-                <CardContent>
-                  <Typography gutterBottom variant="h4" component="div" style={{ textAlign: 'center' }}>
-                    Valores
-                  </Typography>
-                  <Typography variant="h6" color="text.secondary" style={{ textAlign: 'left' }}>
-                    Fidelidad, creando una red de confianza.<br />
-                    Orientación al cliente.<br />
-                    Respeto en el área de trabajo y para nuestros consumidores.<br />
-                    Equilibrio.<br />
-                    Seguridad alimentaria.<br />
-                    Talento.
-                  </Typography>
-                </CardContent>
-              </CustomCard>
-            </Grid>
-          </CustomBox>
+        
+        <Grid item xs={12}>
+          <CustomCard
+            style={props}
+            sx={{ bgcolor: '#c1ffc1' }}
+          >
+            <Avatar
+              variant="rounded"
+              sx={{ width: 100, height: 100, m: '0 auto' }}
+            >
+              <AssignmentIcon sx={{ fontSize: 60 }} />
+            </Avatar>
+
+            <Typography variant="h4">Valores</Typography>
+
+            <Typography variant="h6" color="text.secondary" style={{ textAlign: 'center' }}>
+              Fidelidad, creando una red de confianza.<br />
+              Orientación al cliente.<br />
+              Respeto en el área de trabajo y para nuestros consumidores.<br />
+              Equilibrio.<br />
+              Seguridad alimentaria.<br />
+              Talento.
+            </Typography>
+          </CustomCard>
         </Grid>
       </Grid>
+
       <Footer variant="outlined">
         <CardContent>
           <Typography variant="body2" color="text.secondary" align="center">
@@ -121,7 +140,7 @@ export default function Information() {
             Lugar: Capulhuac
           </Typography>
           <Typography variant="body2" color="text.secondary" align="center">
-            Telefono:725 659 4235
+            Telefono: 725 659 4235
           </Typography>
         </CardContent>
       </Footer>

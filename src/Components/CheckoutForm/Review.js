@@ -1,31 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';  
 import { useStateValue } from "../../StateProvider";
 import accounting from 'accounting';
+import { actionTypes } from '../../Reducer';
 
 const Review = () => {
   const [{ basket }, dispatch] = useStateValue();
-  const navigate = useNavigate();  
-
+  const payments = [];
   const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0;
 
-  const handlePayment = () => {
-    
-    alert('Pago exitoso. ¡Gracias por tu orden!');
-
-    dispatch({
-      type: 'EMPTY_BASKET',
-    });
-    navigate('/');
-  };
-
-  const payments = [];
+  // Actualiza el contexto con el total
+  dispatch({
+    type: actionTypes.SET_TOTAL,
+    total: totalAmount,
+  });
 
   return (
     <React.Fragment>
@@ -71,9 +63,6 @@ const Review = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Button variant="contained" onClick={handlePayment} sx={{ mt: 3 }}>
-        Realizar Pago
-      </Button>
     </React.Fragment>
   );
 };

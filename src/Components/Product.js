@@ -39,8 +39,7 @@ export default function Product({ products: { id, name, productType, image, pric
         dispatch({
             type: actionTypes.ADD_TO_BASKET,
             item: {
-                id,
-                name,
+                id: 1, name: "Galleta amarilla",
                 productType,
                 image,
                 price,
@@ -50,6 +49,7 @@ export default function Product({ products: { id, name, productType, image, pric
     }
 
     return (
+        
         <Card sx={{ maxWidth: 400 }}>
             <CardHeader
                 action={

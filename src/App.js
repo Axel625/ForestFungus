@@ -10,9 +10,13 @@ import SignUp from './Components/Signup';
 import Checkout from './Components/CheckoutForm/Checkout';
 import ChatBot from './Components/Chatbot';
 import Equipo from './Components/Equipo';
+import { StateProvider } from './Components/stateProvider';
+import { initialState } from './Reducer';
+import { reducer } from './Components/reducer';
 
 const App = () => {
   return (
+    <StateProvider initialState={initialState} reducer={reducer}>
     <Router>
       <div className="App">
         <Navbar />
@@ -35,6 +39,7 @@ const App = () => {
         </div>
       </div>
     </Router>
+    </StateProvider>
   );
 };
 

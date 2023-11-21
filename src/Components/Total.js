@@ -8,11 +8,19 @@ import { useNavigate } from "react-router-dom";
 const Total = () => {
     const [{ basket }] = useStateValue(); 
     const totalAmount = getBasketTotal(basket);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+
+    // Obtener el token del localStorage
+    const token = localStorage.getItem('token');
 
     const handleCheckOut = () => {
-        
-        navigate("/Verificacion");
+        // Verificar si el usuario está autenticado antes de redirigir
+        if (token) {
+            navigate("/Verificacion");
+        } else {
+            // Si no está autenticado, redirigir a la página de inicio de sesión
+            navigate("/Inicio_de_Sesion");
+        }
     };
 
     return (
@@ -35,7 +43,7 @@ const Total = () => {
                 variant="contained"
                 color="success"
                 style={{ marginBottom: "8px", width: "100%" }}
-                onClick={handleCheckOut} // Asigna la función de manejo al evento onClick
+                onClick={handleCheckOut}
             >
                 Buy
             </Button>

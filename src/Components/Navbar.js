@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import logo from '../Assets/forest-logo.jpg';
+import { useSpring, animated } from 'react-spring';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -27,11 +28,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const linkStyle = {
   textDecoration: 'none',
-  color: 'white', 
+  color: 'white',
 };
 const linkStyled = {
   textDecoration: 'none',
-  color: 'black', 
+  color: 'black',
 };
 
 const fabStyle = {
@@ -62,6 +63,12 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [basket, setBasket] = useState([]);
 
+  const props = useSpring({
+    loop: true, // Para hacer que la animación se repita continuamente
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
   const handleSignIn = () => {
     setUserIsLoggedIn(true);
     setAnchorEl(null);
@@ -81,9 +88,11 @@ const Navbar = () => {
           </Link>
           <Box sx={menuStyle}>
             <Link to="/Productos" style={linkStyle}>
-              <Button color="inherit" variant="outlined">
-                Products
-              </Button>
+              <animated.div style={props}>
+                <Button color="inherit" variant="outlined">
+                  Products
+                </Button>
+              </animated.div>
             </Link>
             <Link to="/IA" style={linkStyle}>
               <Fab color="primary" aria-label="add" sx={fabStyle}>
