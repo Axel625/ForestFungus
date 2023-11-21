@@ -1,5 +1,5 @@
-import galleta1 from './Assets/azul.jpg';
-import galleta2 from './Assets/naranja.jpg'
+import galleta1 from './Assets/prototipo 2.0.png';
+import galleta2 from './Assets/prototipo 3.0.png'
 const products = [
     {
         id: 1,

@@ -19,7 +19,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 export default function CheckoutCard({
   products: { id, name, productType, image, price, description },
 }) {
-  const [dispatch] = useStateValue();
+  const [{ basket }, dispatch] = useStateValue();
   const [openDialog, setOpenDialog] = React.useState(false);
 
   const removeItem = () => {

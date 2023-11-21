@@ -14,7 +14,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import logo from '../Assets/Forest.png';
+import logo from '../Assets/forest-logo.jpg';
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: -3,
@@ -26,7 +27,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const linkStyle = {
   textDecoration: 'none',
-  color: 'white',
+  color: 'white', 
+};
+const linkStyled = {
+  textDecoration: 'none',
+  color: 'black', 
 };
 
 const fabStyle = {
@@ -38,7 +43,7 @@ const fabStyle = {
 };
 
 const navbarStyle = {
-  backgroundColor: '#ff7514',
+  backgroundColor: '#000000',
 };
 
 const logoStyle = {
@@ -97,9 +102,9 @@ const Navbar = () => {
                 <ExitToAppIcon /> Cerrar sesión
               </MenuItem>
             ) : (
-              <Link to="Inicio_de_Sesion" style={linkStyle}>
+              <Link to="Inicio_de_Sesion" style={linkStyled}>
                 <MenuItem onClick={handleSignIn}>
-                  <AccountCircleIcon /> Iniciar sesión
+                  <AccountCircleIcon style={{ marginRight: '8px' }} /> Iniciar sesión
                 </MenuItem>
               </Link>
             )}

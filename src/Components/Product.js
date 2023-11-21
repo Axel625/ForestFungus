@@ -13,7 +13,7 @@ import accounting from 'accounting';
 import { AddShoppingCart } from '@mui/icons-material';
 import { actionTypes } from '../Reducer';
 import { useStateValue } from '../StateProvider';
-
+import Information from './Information';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -28,7 +28,7 @@ const ExpandMore = styled((props) => {
 
 export default function Product({ products: { id, name, productType, image, price, description } }) {
 
-    const [dispatch] = useStateValue();
+    const [{ basket }, dispatch] = useStateValue();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -48,7 +48,6 @@ export default function Product({ products: { id, name, productType, image, pric
             }
         })
     }
-
 
     return (
         <Card sx={{ maxWidth: 400 }}>

@@ -1,5 +1,6 @@
 export const initialState = {
-    basket: []
+    basket: [],
+    basketCount: 0,
 }
 
 export const actionTypes = {
@@ -20,25 +21,27 @@ const Reducer = (state, action) => {
             return {
                 ...state,
                 basket: [...state.basket, action.item],
-                basketCount: 0,
+                basketCount: state.basketCount + 1,
             };
-            case "REMOVE_ITEM":
-                const index = state.basket.findIndex((basketItem=>basketItem.id===action.id))
-                let newBasket = [...state.basket];
-                if(index>=0){
-                    newBasket.splice(index, 1)
-                }else {console.log("Producto elimindao")}
-                return{
-                   ...state,
-                   basket: newBasket,
-                };
-                case "CLEAR_BASKET":
-                    return {
-                        ...state,
-                        basket: [],
-                        
-                    };
-       default: return state;
+        case "REMOVE_ITEM":
+            const index = state.basket.findIndex((basketItem => basketItem.id === action.id))
+            let newBasket = [...state.basket];
+            if (index >= 0) {
+                newBasket.splice(index, 1)
+            } else { console.log("Producto elimindao") }
+            return {
+                ...state,
+                basket: newBasket,
+                basketCount: state.basketCount - 1,
+                basket: newBasket,
+            };
+        case "CLEAR_BASKET":
+            return {
+                ...state,
+                basket: [],
+
+            };
+        default: return state;
     }
 }
 

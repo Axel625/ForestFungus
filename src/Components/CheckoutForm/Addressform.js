@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+// AddressForm.jsx
+import React, { useState, useRef } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
 
-export default function AddressForm() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    address1: '',
-    city: '',
-    zip: '',
-    country: '',
-  });
-
+export default function AddressForm({ onNext, formData, setFormData }) {
   const [formErrors, setFormErrors] = useState({
     firstName: false,
     lastName: false,
@@ -23,6 +16,23 @@ export default function AddressForm() {
     zip: false,
     country: false,
   });
+
+  const lastNameRef = useRef(null);
+  const address1Ref = useRef(null);
+  const cityRef = useRef(null);
+  const zipRef = useRef(null);
+  const countryRef = useRef(null);
+
+  const areAllFieldsFilled = () => {
+    const emptyFields = Object.keys(formData).filter((key) => !formData[key]);
+    emptyFields.forEach((field) => {
+      setFormErrors((prevErrors) => ({
+        ...prevErrors,
+        [field]: true,
+      }));
+    });
+    return emptyFields.length === 0;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,18 +47,10 @@ export default function AddressForm() {
   };
 
   const handleNext = () => {
-    const errors = {};
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
-        errors[key] = true;
-      }
-    });
-
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      alert('Por favor, complete todos los campos obligatorios.');
+    if (areAllFieldsFilled()) {
+      onNext();
     } else {
-      alert('Formulario enviado correctamente.');
+      alert('Por favor, completa todos los campos obligatorios.');
     }
   };
 
@@ -71,6 +73,8 @@ export default function AddressForm() {
             value={formData.firstName}
             error={formErrors.firstName}
             helperText={formErrors.firstName ? 'Este campo es obligatorio' : ''}
+            onBlur={() => setFormData('firstName')}
+            inputRef={lastNameRef}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -86,6 +90,8 @@ export default function AddressForm() {
             value={formData.lastName}
             error={formErrors.lastName}
             helperText={formErrors.lastName ? 'Este campo es obligatorio' : ''}
+            onBlur={() => setFormData('lastName')}
+            inputRef={address1Ref}
           />
         </Grid>
         <Grid item xs={12}>
@@ -101,6 +107,8 @@ export default function AddressForm() {
             value={formData.address1}
             error={formErrors.address1}
             helperText={formErrors.address1 ? 'Este campo es obligatorio' : ''}
+            onBlur={() => setFormData('address1')}
+            inputRef={cityRef}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -116,6 +124,8 @@ export default function AddressForm() {
             value={formData.city}
             error={formErrors.city}
             helperText={formErrors.city ? 'Este campo es obligatorio' : ''}
+            onBlur={() => setFormData('city')}
+            inputRef={zipRef}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -131,6 +141,8 @@ export default function AddressForm() {
             value={formData.zip}
             error={formErrors.zip}
             helperText={formErrors.zip ? 'Este campo es obligatorio' : ''}
+            onBlur={() => setFormData('zip')}
+            inputRef={countryRef}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -146,6 +158,7 @@ export default function AddressForm() {
             value={formData.country}
             error={formErrors.country}
             helperText={formErrors.country ? 'Este campo es obligatorio' : ''}
+            onBlur={() => setFormData('country')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -155,9 +168,9 @@ export default function AddressForm() {
           />
         </Grid>
       </Grid>
-      <button 
-       variant="contained"
-      onClick={handleNext}>Submit</button>
+      <Button variant="contained" onClick={handleNext}>
+        Next
+      </Button>
     </React.Fragment>
   );
 }
