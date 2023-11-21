@@ -49,7 +49,6 @@ export default function Product({ products: { id, name, productType, image, pric
     }
 
     return (
-        
         <Card sx={{ maxWidth: 400 }}>
             <CardHeader
                 action={
