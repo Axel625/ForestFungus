@@ -10,8 +10,10 @@ import { actionTypes } from '../../Reducer';
 
 const Review = () => {
   const [{ basket }, dispatch] = useStateValue();
+
   const payments = {}; 
   const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0;
+
 
   // Actualiza el contexto con el total
   dispatch({

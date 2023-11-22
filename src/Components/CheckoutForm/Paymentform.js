@@ -10,17 +10,19 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { useNavigate } from 'react-router-dom';
-import { useStateValue } from "../../StateProvider";
+import { useStateValue } from '../../StateProvider';
 import accounting from 'accounting';
 
-const Review = () => {
+const PaymentForm = () => {
   const [{ basket }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const totalAmount = basket ? basket.reduce((total, item) => total + item.price, 0) : 0;
 
   const [paymentMethod, setPaymentMethod] = useState('creditCard');
+  const [showPayPalButton, setShowPayPalButton] = useState(false);
 
   const [creditCard, setCreditCard] = useState({
     cardName: '',
@@ -35,6 +37,10 @@ const Review = () => {
 
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
+  };
+
+  const handlePayPalCheckboxChange = () => {
+    setShowPayPalButton(!showPayPalButton);
   };
 
   const handleCreditCardPayment = () => {
@@ -78,12 +84,13 @@ const Review = () => {
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
+
       <List disablePadding>
         {basket ? (
           basket.map((product) => (
             <ListItem key={product.id} sx={{ py: 1, px: 0 }}>
               <ListItemText primary={product.name} secondary={product.desc} />
-              <Typography variant="body2">{accounting.formatMoney(product.price, "$")}</Typography>
+              <Typography variant="body2">{accounting.formatMoney(product.price, '$')}</Typography>
             </ListItem>
           ))
         ) : (
@@ -94,7 +101,7 @@ const Review = () => {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {accounting.formatMoney(totalAmount, "$")}
+            {accounting.formatMoney(totalAmount, '$')}
           </Typography>
         </ListItem>
       </List>
@@ -179,22 +186,40 @@ const Review = () => {
           {paymentMethod === 'paypal' && (
             <>
               <TextField
-                label="PayPal Email"
+                label="Email"
                 fullWidth
                 variant="outlined"
                 margin="normal"
                 value={paypal.email}
                 onChange={(e) => setPaypal({ ...paypal, email: e.target.value })}
               />
-              {/* Botón de "Realizar Pago" para PayPal */}
-              <Button
-                variant="contained"
-                onClick={handlePaypalPayment}
-                sx={{ mt: 3 }}
-                disabled={!isPaypalFormFilled()}
-              >
-                Pagar con PayPal
-              </Button>
+              {/* Botón de PayPal */}
+              <PayPalScriptProvider options={{ 'client-id': 'tu-client-id-de-PayPal' }}>
+                <PayPalButtons
+                  style={{ layout: 'horizontal' }}
+                  createOrder={(data, actions) => {
+                    // Lógica para crear la orden de PayPal
+                    return actions.order.create({
+                      purchase_units: [
+                        {
+                          amount: {
+                            value: totalAmount,
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                  onApprove={(data, actions) => {
+                    // Lógica para la aprobación del pago de PayPal
+                    return actions.order.capture().then((details) => {
+                      alert(`Pago con PayPal exitoso. ¡Gracias por tu orden!`);
+                      handlePaymentSuccess();
+                    });
+                  }}
+                  onError={(err) => console.error(err)}
+                  options={{ clientId: 'tu-client-id-de-PayPal' }}
+                />
+              </PayPalScriptProvider>
             </>
           )}
         </Grid>
@@ -203,4 +228,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default PaymentForm;
