@@ -14,6 +14,7 @@ export const getBasketTotal = (basket) => {
 }
 
 
+
 const Reducer = (state, action) => {
     console.log(action);
     switch (action.type) {
@@ -23,18 +24,21 @@ const Reducer = (state, action) => {
                 basket: [...state.basket, action.item],
                 basketCount: state.basketCount + 1,
             };
-        case "REMOVE_ITEM":
-            const index = state.basket.findIndex((basketItem => basketItem.id === action.id))
-            let newBasket = [...state.basket];
-            if (index >= 0) {
-                newBasket.splice(index, 1)
-            } else { console.log("Producto elimindao") }
-            return {
-                ...state,
-                basket: newBasket,
-                basketCount: state.basketCount - 1,
-                basket: newBasket,
-            };
+            case "REMOVE_ITEM":
+                const index = state.basket.findIndex((basketItem => basketItem.id === action.id))
+                let newBasket = [...state.basket];
+                if (index >= 0) {
+                    newBasket.splice(index, 1)
+                    return {
+                        ...state,
+                        basket: newBasket,
+                        basketCount: state.basketCount - 1,
+                    };
+                } else {
+                    console.log("Producto eliminado");
+                    return state;
+                };
+            
         case "CLEAR_BASKET":
             return {
                 ...state,

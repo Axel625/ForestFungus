@@ -57,7 +57,7 @@ const Products = () => {
       <Footer variant="outlined">
         <CardContent>
           <Typography variant="body2" color="text.secondary" align="center">
-            Contacto: ejemplo@correo.com
+          Contacto: Honlleta8@gmail.com
           </Typography>
           <Typography variant="body2" color="text.secondary" align="center">
             Nombre de la empresa: Forest Fungus

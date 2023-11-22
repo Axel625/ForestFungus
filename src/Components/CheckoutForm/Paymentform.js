@@ -185,14 +185,9 @@ const PaymentForm = () => {
           {/* Campos de PayPal */}
           {paymentMethod === 'paypal' && (
             <>
-              <TextField
-                label="Email"
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                value={paypal.email}
-                onChange={(e) => setPaypal({ ...paypal, email: e.target.value })}
-              />
+             <PayPalScriptProvider options={{ clientId: "AcoIHbHcpZtMDEOLlcP50_yRYh3e6GxJwGXV0l-qBONXSKEsqyhKpKoCcs-AD4p7QHxssxAwmZCSGomY" }}>
+          <PayPalButtons style={{ layout: "horizontal" }} />
+        </PayPalScriptProvider>
               {/* Botón de PayPal */}
               <PayPalScriptProvider options={{ 'client-id': 'tu-client-id-de-PayPal' }}>
                 <PayPalButtons

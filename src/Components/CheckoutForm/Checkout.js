@@ -1,4 +1,4 @@
-// Checkout.jsx
+
 import React, { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -8,9 +8,9 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
-import AddressForm from '../CheckoutForm/Addressform';  // Ruta actualizada
-import PaymentForm from '../CheckoutForm/Paymentform';  // Ruta actualizada
-import Review from '../CheckoutForm/Review';  // Ruta actualizada
+import AddressForm from '../CheckoutForm/Addressform';  
+import PaymentForm from '../CheckoutForm/Paymentform';
+import Review from '../CheckoutForm/Review';  
 import Button from "@mui/material/Button";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -104,7 +104,7 @@ export default function Checkout() {
       <Footer variant="outlined">
         <CardContent>
           <Typography variant="body2" color="text.secondary" align="center">
-            Contacto: ejemplo@correo.com
+          Contacto: Honlleta8@gmail.com
           </Typography>
           <Typography variant="body2" color="text.secondary" align="center">
             Nombre de la empresa: Forest Fungus

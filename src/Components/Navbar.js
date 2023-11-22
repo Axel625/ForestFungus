@@ -77,6 +77,11 @@ const Navbar = () => {
   const handleSignOut = () => {
     setUserIsLoggedIn(false);
     setAnchorEl(null);
+    localStorage.removeItem('token');
+
+  };
+  const handleAddToBasket = (product) => {
+    setBasket(prevBasket => [...prevBasket, product]);
   };
 
   return (
@@ -121,7 +126,7 @@ const Navbar = () => {
 
           <Link to="/Checkout-page" style={linkStyle}>
             <IconButton aria-label="cart" color="inherit" variant="outlined">
-              <StyledBadge badgeContent={basket.length} color="error">
+              <StyledBadge badgeContent={basket.length} color='error'>
                 <ShoppingCartIcon />
               </StyledBadge>
             </IconButton>

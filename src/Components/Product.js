@@ -15,6 +15,7 @@ import { actionTypes } from '../Reducer';
 import { useStateValue } from '../StateProvider';
 import Information from './Information';
 
+
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -70,7 +71,7 @@ export default function Product({ products: { id, name, productType, image, pric
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={addToBasket}>
+                <IconButton aria-label="add to favorites" onClick={addToBasket}>    
                     <AddShoppingCart fontSize='large' />
                 </IconButton>
                 <ExpandMore
