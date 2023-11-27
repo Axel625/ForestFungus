@@ -31,9 +31,7 @@ const PaymentForm = () => {
     cvv: '',
   });
 
-  const [paypal, setPaypal] = useState({
-    email: '',
-  });
+  const [isProcessing, setProcessing] = useState(false);
 
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -44,39 +42,32 @@ const PaymentForm = () => {
   };
 
   const handleCreditCardPayment = () => {
-    // Lógica de pago con tarjeta de crédito
-    alert('Pago con tarjeta de crédito exitoso. ¡Gracias por tu orden!');
-    handlePaymentSuccess();
+    setProcessing(true);
+
+    // Simula un tiempo de procesamiento para la animación
+    setTimeout(() => {
+      alert('Pago con tarjeta de crédito exitoso. ¡Gracias por tu orden!');
+      handlePaymentSuccess();
+      setProcessing(false); // Restablece el estado después de la finalización del pago
+    }, 2000); // 2000 milisegundos (2 segundos) como ejemplo de tiempo de procesamiento simulado
   };
 
   const handlePaypalPayment = () => {
-    // Lógica de pago con PayPal
     alert('Pago con PayPal exitoso. ¡Gracias por tu orden!');
     handlePaymentSuccess();
   };
 
   const handlePaymentSuccess = () => {
-    // Vacía la cesta después de realizar el pago
     dispatch({
       type: 'EMPTY_BASKET',
     });
 
-    // Redirige a la pantalla principal u otra pantalla deseada
     navigate('/');
   };
 
   const isCreditCardFormFilled = () => {
     const { cardName, cardNumber, expDate, cvv } = creditCard;
     return cardName !== '' && cardNumber !== '' && expDate !== '' && cvv !== '';
-  };
-
-  const isPaypalFormFilled = () => {
-    return paypal.email !== '';
-  };
-
-  const isPaymentFormValid = () => {
-    return (paymentMethod === 'creditCard' && isCreditCardFormFilled()) ||
-           (paymentMethod === 'paypal' && isPaypalFormFilled());
   };
 
   return (
@@ -105,12 +96,13 @@ const PaymentForm = () => {
           </Typography>
         </ListItem>
       </List>
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment Details
           </Typography>
-          {/* Selector de método de pago con radio buttons */}
+
           <FormControl component="fieldset" margin="normal">
             <RadioGroup
               aria-label="payment-method"
@@ -130,91 +122,58 @@ const PaymentForm = () => {
               />
             </RadioGroup>
           </FormControl>
-          {/* Campos de tarjeta de crédito */}
+
           {paymentMethod === 'creditCard' && (
             <>
-              <TextField
-                label="Cardholder Name"
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                value={creditCard.cardName}
-                onChange={(e) => setCreditCard({ ...creditCard, cardName: e.target.value })}
-              />
-              <TextField
-                label="Card Number"
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                value={creditCard.cardNumber}
-                onChange={(e) => setCreditCard({ ...creditCard, cardNumber: e.target.value })}
-              />
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <TextField
-                    label="Expiration Date"
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    value={creditCard.expDate}
-                    onChange={(e) => setCreditCard({ ...creditCard, expDate: e.target.value })}
-                  />
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <TextField
+                  label="Cardholder Name"
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  value={creditCard.cardName}
+                  onChange={(e) => setCreditCard({ ...creditCard, cardName: e.target.value })}
+                />
+                <TextField
+                  label="Card Number"
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  value={creditCard.cardNumber}
+                  onChange={(e) => setCreditCard({ ...creditCard, cardNumber: e.target.value })}
+                />
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Expiration Date"
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      value={creditCard.expDate}
+                      onChange={(e) => setCreditCard({ ...creditCard, expDate: e.target.value })}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="CVV"
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      value={creditCard.cvv}
+                      onChange={(e) => setCreditCard({ ...creditCard, cvv: e.target.value })}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label="CVV"
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    value={creditCard.cvv}
-                    onChange={(e) => setCreditCard({ ...creditCard, cvv: e.target.value })}
-                  />
-                </Grid>
-              </Grid>
-              {/* Botón de "Realizar Pago" para tarjeta de crédito */}
+              </div>
+
               <Button
                 variant="contained"
                 onClick={handleCreditCardPayment}
                 sx={{ mt: 3 }}
-                disabled={!isCreditCardFormFilled()}
+                disabled={!isCreditCardFormFilled() || isProcessing}
               >
-                Pagar con Tarjeta de Crédito
+                {isProcessing ? 'Procesando compra...' : 'Pagar con Tarjeta de Crédito'}
               </Button>
-            </>
-          )}
-          {/* Campos de PayPal */}
-          {paymentMethod === 'paypal' && (
-            <>
-             <PayPalScriptProvider options={{ clientId: "AcoIHbHcpZtMDEOLlcP50_yRYh3e6GxJwGXV0l-qBONXSKEsqyhKpKoCcs-AD4p7QHxssxAwmZCSGomY" }}>
-          <PayPalButtons style={{ layout: "horizontal" }} />
-        </PayPalScriptProvider>
-              {/* Botón de PayPal */}
-              <PayPalScriptProvider options={{ 'client-id': 'tu-client-id-de-PayPal' }}>
-                <PayPalButtons
-                  style={{ layout: 'horizontal' }}
-                  createOrder={(data, actions) => {
-                    // Lógica para crear la orden de PayPal
-                    return actions.order.create({
-                      purchase_units: [
-                        {
-                          amount: {
-                            value: totalAmount,
-                          },
-                        },
-                      ],
-                    });
-                  }}
-                  onApprove={(data, actions) => {
-                    // Lógica para la aprobación del pago de PayPal
-                    return actions.order.capture().then((details) => {
-                      alert(`Pago con PayPal exitoso. ¡Gracias por tu orden!`);
-                      handlePaymentSuccess();
-                    });
-                  }}
-                  onError={(err) => console.error(err)}
-                  options={{ clientId: 'tu-client-id-de-PayPal' }}
-                />
-              </PayPalScriptProvider>
             </>
           )}
         </Grid>
