@@ -18,6 +18,11 @@ import products from '../Product-data'; // Ajusta la ruta según sea necesario
 const Footer = styled(Card)({
   marginTop: '20px',
   marginBottom: '20px',
+  backgroundColor: 'black',
+  color: 'white',
+  padding: '15px', 
+  boxSizing: 'border-box',  
+  textAlign: 'center',
 });
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -56,16 +61,16 @@ const Products = () => {
       </Grid>
       <Footer variant="outlined">
         <CardContent>
-          <Typography variant="body2" color="text.secondary" align="center">
+          <Typography variant="body2" color="white" align="center">
           Contacto: Honlleta8@gmail.com
           </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
+          <Typography variant="body2" color="white" align="center">
             Nombre de la empresa: Forest Fungus
           </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
+          <Typography variant="body2" color="white" align="center">
             Lugar: Capulhuac
           </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
+          <Typography variant="body2" color="white" align="center">
             Telefono:725 659 4235
           </Typography>
         </CardContent>
