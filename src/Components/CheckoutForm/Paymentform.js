@@ -44,12 +44,12 @@ const PaymentForm = () => {
   const handleCreditCardPayment = () => {
     setProcessing(true);
 
-    // Simula un tiempo de procesamiento para la animación
+    
     setTimeout(() => {
       alert('Pago con tarjeta de crédito exitoso. ¡Gracias por tu orden!');
       handlePaymentSuccess();
-      setProcessing(false); // Restablece el estado después de la finalización del pago
-    }, 2000); // 2000 milisegundos (2 segundos) como ejemplo de tiempo de procesamiento simulado
+      setProcessing(false); 
+    }, 2000); 
   };
 
   const handlePaypalPayment = () => {

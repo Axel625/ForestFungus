@@ -28,7 +28,7 @@ const App = () => {
             <Route path="/Inicio_de_Sesion" Component={SignIn} />
             <Route path="/Registro" Component={SignUp} />
             <Route path="/Verificacion" Component={Checkout} />
-            <Route path="/IA" Component={ChatBot} />
+            
             <Route path="/miebros_del_equipo" Component={Equipo} />
           </Routes>
         </div>

@@ -65,7 +65,7 @@ export default function Information() {
         <Grid item xs={6}>
           <CustomCard
             style={props}
-            sx={{ bgcolor: '#d7e9f7' }}
+            sx={{ bgcolor: '#f3d2c1' }}
           >
             <Avatar
               variant="square"
@@ -87,7 +87,7 @@ export default function Information() {
         <Grid item xs={6}>
           <CustomCard
             style={props}
-            sx={{ bgcolor: '#f6f2d4' }}
+            sx={{ bgcolor: '#f3d2c1' }}
           >
             <Avatar
               variant="rounded"
@@ -111,7 +111,7 @@ export default function Information() {
         <Grid item xs={12}>
           <CustomCard
             style={props}
-            sx={{ bgcolor: '#c1ffc1' }}
+            sx={{ bgcolor: '#f3d2c1' }}
           >
             <Avatar
               variant="rounded"

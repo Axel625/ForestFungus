@@ -64,7 +64,7 @@ const Navbar = () => {
   const [basket, setBasket] = useState([]);
 
   const props = useSpring({
-    loop: true, // Para hacer que la animación se repita continuamente
+    loop: true, 
     from: { opacity: 0 },
     to: { opacity: 1 },
   });

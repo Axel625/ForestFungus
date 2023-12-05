@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -8,21 +7,22 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
-import AddressForm from '../CheckoutForm/Addressform';  
+import AddressForm from '../CheckoutForm/Addressform';
 import PaymentForm from '../CheckoutForm/Paymentform';
-import Review from '../CheckoutForm/Review';  
+import Review from '../CheckoutForm/Review';
 import Button from "@mui/material/Button";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { styled } from "@mui/material/styles";
+import { Link } from 'react-router-dom';
 
 const Footer = styled(Card)({
   marginTop: "20px",
   marginBottom: "20px",
   backgroundColor: 'black',
   color: 'white',
-  padding: '15px', 
-  boxSizing: 'border-box',  
+  padding: '15px',
+  boxSizing: 'border-box',
   textAlign: 'center',
 });
 
@@ -97,19 +97,20 @@ export default function Checkout() {
           )}
         </Paper>
       </Container>
-      <div>
-        <Button
-          variant="contained"
-          onClick={handleNext}
-          sx={{ mt: 3, ml: 1 }}
-        >
-          Distraete jugando un rato
-        </Button>
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Link to="https://simmer.io/@krytias/honlleta">
+          <Button
+            variant="contained"
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Distraete jugando un rato
+          </Button>
+        </Link>
+      </Box>
       <Footer variant="outlined">
         <CardContent>
           <Typography variant="body2" color="white" align="center">
-          Contacto: Honlleta8@gmail.com
+            Contacto: Honlleta8@gmail.com
           </Typography>
           <Typography variant="body2" color="white" align="center">
             Nombre de la empresa: Forest Fungus
